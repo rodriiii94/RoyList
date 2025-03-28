@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <h1 class="mt-50 text-4xl text-center text-blue-500 font-bold">
+    <h1 class="mt-60 text-4xl text-center text-blue-500 font-bold">
         Ola k ase
     </h1>
 </body>
