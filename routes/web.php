@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Http;
 
-Route::get('/', function () {
+// ! Rutas de la API
+Route::get('/pruebaApi', function () {
     //return view('primera');
     $response = Http::get('http://localhost:3000/api/data');
     $data = $response->json();
@@ -14,3 +15,16 @@ Route::get('/', function () {
     }
     //dd($data);
 });
+
+// Ruta principal de la aplicación, directorio index
+Route::get('/', function () {
+    return view('index');
+});
+
+// Route::get('/login', function (){
+//     return view('login');
+// });
+
+// Route::get('/register', function (){
+//     return view('register');
+// });
