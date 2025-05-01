@@ -9,14 +9,50 @@
                 <span>Roy<span class="text-[#10B981]">List</span></span>
             </a>
 
-            
+            {{-- Navegación para usuarios autenticados --}}
+            @auth
+            <nav class="hidden md:flex items-center space-x-8">
+                <a {{-- href="{{ route('dashboard') }}" --}} class="text-gray-600 hover:text-[#2563EB] font-medium">Mi Dashboard</a>
+                <a {{-- href="{{ route('lists.index') }}" --}} class="text-gray-600 hover:text-[#2563EB] font-medium">Mis Listas</a>
+                <a {{-- href="{{ route('profile') }}" --}} class="text-gray-600 hover:text-[#2563EB] font-medium">Perfil</a>
+                <a href="{{ route('logout') }}" class="text-gray-600 hover:text-[#2563EB] font-medium">Cerrar sesión</a>
+            </nav>
+            @endauth
 
             {{-- Acciones --}}
             <div class="flex items-center space-x-4">
-                <a href="{{ route('login') }}" class="hidden md:inline-block text-gray-600 hover:text-[#2563EB] font-medium px-3 py-2 transition duration-300">Iniciar sesión</a>
-                <a href="{{ route('register') }}" class="bg-gradient-to-r from-[#2563EB] to-[#10B981] text-white px-5 py-2 rounded-full font-medium shadow-sm hover:shadow-md transition duration-300 transform hover:scale-105">
-                    Regístrate gratis
-                </a>
+                @auth
+                    {{-- Menú de usuario autenticado --}}
+                    <div class="relative group">
+                        <button class="flex items-center space-x-2 focus:outline-none">
+                            <span class="hidden md:inline text-emerald-700 font-medium">{{ Auth::user()->name }}</span>
+                            <div class="w-8 h-8 rounded-full bg-emerald-200 flex items-center justify-center">
+                                <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
+                            </div>
+                        </button>
+                        
+                        {{-- Dropdown menu --}}
+                        <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden group-hover:block z-50">
+                            <a {{-- href="{{ route('profile') }}" --}} class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Mi Perfil</a>
+                            <a href="{{ route('logout') }}" 
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                Cerrar sesión
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                                @csrf
+                            </form>
+                        </div>
+                    </div>
+                @else
+                    {{-- Menú para invitados --}}
+                    <a href="{{ route('login') }}" class="hidden md:inline-block text-gray-600 hover:text-[#2563EB] font-medium px-3 py-2 transition duration-300">Iniciar sesión</a>
+                    <a href="{{ route('register') }}" class="bg-gradient-to-r from-[#2563EB] to-[#10B981] text-white px-5 py-2 rounded-full font-medium shadow-sm hover:shadow-md transition duration-300 transform hover:scale-105">
+                        Regístrate gratis
+                    </a>
+                @endauth
                 
                 {{-- Menú móvil --}}
                 <button class="md:hidden text-gray-600 focus:outline-none">
