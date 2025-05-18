@@ -13,4 +13,9 @@ class Supermercado extends Model
     {
         return $this->hasMany(ListaCompra::class);
     }
+
+    public function getNombre()
+    {
+        return ucfirst($this->nombre);
+    }
 }

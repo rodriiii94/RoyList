@@ -50,7 +50,9 @@ class LoginController extends Controller
         if ($this->authService->attemptLogin($credentials)) {
             return redirect()->route('index');
         } else {
-            return back();
+            return back()->withErrors([
+                'email' => 'Las credenciales proporcionadas no coinciden con nuestros registros.',
+            ])->onlyInput('email');
         }
     }
 

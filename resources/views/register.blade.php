@@ -74,7 +74,7 @@
                     <input id="terms" name="terms" type="checkbox"
                         class="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300 rounded">
                     <label for="terms" class="ml-2 block text-sm text-gray-700">
-                        Acepto los <a href="#" class="font-medium text-emerald-600 hover:text-emerald-500">Términos de servicio</a> y <a href="#" class="font-medium text-emerald-600 hover:text-emerald-500">Política de privacidad</a>
+                        Acepto los <a href="{{ route('terminos') }}" class="font-medium text-emerald-600 hover:text-emerald-500">Términos de servicio</a> y <a href="{{ route('politica') }}" class="font-medium text-emerald-600 hover:text-emerald-500">Política de privacidad</a>
                     </label>
                 </div>
 

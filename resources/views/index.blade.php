@@ -18,7 +18,7 @@
                     RoyList simplifica tu experiencia de compra con listas inteligentes que te ayudan a ahorrar tiempo, reducir el desperdicio y mantener el control de tu presupuesto.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                    <a href="#" class="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 rounded-lg font-semibold shadow-sm transition duration-300">
+                    <a href="{{ route('listas') }}" class="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 rounded-lg font-semibold shadow-sm transition duration-300">
                         Comenzar ahora
                     </a>
                 </div>
