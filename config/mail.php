@@ -33,6 +33,7 @@ return [
     |            "postmark", "resend", "log", "array",
     |            "failover", "roundrobin"
     |
+    // ! Token for mailtrap: 679fe2c780172d99c042c4f52427e4fb
     */
 
     'mailers' => [
