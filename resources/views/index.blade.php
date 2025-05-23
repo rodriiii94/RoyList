@@ -18,7 +18,7 @@
                     RoyList simplifica tu experiencia de compra con listas inteligentes que te ayudan a ahorrar tiempo, reducir el desperdicio y mantener el control de tu presupuesto.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                    <a href="{{ route('listas') }}" class="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 rounded-lg font-semibold shadow-sm transition duration-300">
+                    <a href="{{ route('listas') }}" class="{{-- bg-emerald-600 --}} hover:bg-emerald-700 bg-gradient-to-r from-[#2563EB] to-[#10B981] text-white px-8 py-3 rounded-lg font-semibold shadow-sm transition duration-300">
                         Comenzar ahora
                     </a>
                 </div>
@@ -78,11 +78,11 @@
 {{-- BENEFICIOS DESTACADOS --}}
 <section class="py-20 bg-gray-50">
     <div class="container mx-auto px-6">
-        <div class="flex flex-col lg:flex-row items-center gap-12">
+        <div class="flex flex-col lg:flex-row items-center gap-12 ml-40">
             {{-- Imagen --}}
             <div class="flex-1 max-w-lg">
-                <div class="relative rounded-xl overflow-hidden shadow-lg">
-                    <img src="{{ asset('images/shopping-list.jpg') }}" alt="Beneficios de RoyList" class="w-full h-auto object-cover">
+                <div class="relative rounded-xl overflow-hidden">
+                    <img src="{{ asset('images/RoyListLogoTrans.png') }}" alt="Beneficios de RoyList" class="w-full h-auto object-cover">
                 </div>
             </div>
             

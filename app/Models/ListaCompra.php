@@ -9,8 +9,12 @@ use App\Models\Supermercado;
 
 class ListaCompra extends Model
 {
-    protected $fillable = ['user_id', 'supermercado_id', 'nombre'];
-    
+    protected $fillable = [
+        'user_id', 
+        'supermercado_id', 
+        'nombre'
+    ];
+
     // La tabla de la base de datos
     protected $table = 'lista_compra';
 
@@ -38,5 +42,24 @@ class ListaCompra extends Model
             'supermercado_id' => $supermercadoId,
             'nombre' => $nombre,
         ]);
+    }
+
+    // Borrar lista de compra
+    // Se le pasa el id de la lista
+    public function borrarLista($listaId)
+    {
+        return self::destroy($listaId);
+    }
+
+    // Obtener todas las listas de compra del usuario
+    public function obtenerListas($userId)
+    {
+        return self::where('user_id', $userId)->get();
+    }
+
+    // Mostrar una lista de compra
+    public function mostrarLista($listaId)
+    {
+        return self::with(['supermercado', 'productos'])->findOrFail($listaId);
     }
 }

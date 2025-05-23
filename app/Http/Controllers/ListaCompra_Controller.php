@@ -3,12 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\ListaCompra;
-use Illuminate\Container\Attributes\Auth;
+use App\Models\ProductoLista;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
 
 class ListaCompra_Controller extends Controller
 {
+
+    private $user_id;
+
+    public function __construct()
+    {
+        $this->user_id = FacadesAuth::id();
+    }
+
     public function showListView()
     {
         return view('listas');
@@ -16,7 +26,6 @@ class ListaCompra_Controller extends Controller
 
     public function create(Request $request)
     {
-        $user_id = FacadesAuth::id();
         $supermercado = $request->input('supermercado_id');
         $nombre = $request->input('nombre');
 
@@ -28,17 +37,71 @@ class ListaCompra_Controller extends Controller
 
         // Crear una nueva lista de compra
         $listaCompra = new ListaCompra();
-        $listaCompra->crearLista($user_id, $supermercado, $nombre);
+        $listaCompra->crearLista($this->user_id, $supermercado, $nombre);
 
         // Redirigir a la vista de listas de compra
         return redirect()->route('listas')->with('success', 'Lista de compra creada con éxito.');
     }
 
-    public function showList($id)
+    // Obtener todas las listas de compra del usuario
+    public function getListas()
     {
-        // Aquí puedes manejar la lógica para mostrar una lista de compra específica
-        // Por ejemplo, buscar en la base de datos o en una API externa
+        $listaCompra = new ListaCompra();
+        $listas = $listaCompra->obtenerListas($this->user_id);
+        $productos = [];
 
-        return view('listas.show', compact('id'));
+        foreach ($listas as $lista) {
+            $productos[$lista->id] = $this->contarProductos($lista->id);
+        }
+
+        return view('listas', compact('listas', 'productos'));
+    }
+
+    public function contarProductos($listaId)
+    {
+        $productoLista = new ProductoLista();
+        $productos = $productoLista->contarProductos($listaId);
+        return $productos;
+    }
+
+
+    /**
+     * Elimina una lista de compra por su identificador.
+     *
+     * Este método crea una nueva instancia de ListaCompra y llama al método borrarLista
+     * pasando el ID proporcionado para eliminar la lista correspondiente. Después de la eliminación,
+     * redirige al usuario a la ruta 'listas' mostrando un mensaje de éxito.
+     *
+     * @param int $id Identificador de la lista de compra a eliminar.
+     * @return \Illuminate\Http\RedirectResponse Redirección a la vista de listas con mensaje de éxito.
+     */
+    public function borrarLista($id)
+    {
+        $listaCompra = new ListaCompra();
+        $listaCompra->borrarLista($id);
+        return redirect()->route('listas')->with('success', 'Lista de compra eliminada con éxito.');
+    }
+
+    // Mostrar pagina de una sola lista de compra
+    /**
+     * Muestra la lista de compra correspondiente al ID proporcionado.
+     *
+     * Este método instancia un nuevo objeto de ListaCompra, obtiene la lista de compra
+     * asociada al identificador dado y retorna la vista 'productos' con la lista obtenida.
+     *
+     * @param int $id El identificador de la lista de compra a mostrar.
+     * @return \Illuminate\View\View La vista 'productos' con la lista de compra.
+     */
+    public function mostrarLista($id)
+    {
+        $listaCompra = new ListaCompra();
+        $lista = $listaCompra->mostrarLista($id);
+        $productoListaController = new ProductoLista_Controller();
+        $productosPorCategoria = $productoListaController->mostrarProductos();
+
+        // Agrupar por categoría (puedes hacer esto dentro del bloque también si prefieres)
+        // $productosPorCategoria = collect($productosApi)->groupBy('categoria');
+
+        return view('productos', compact('lista', 'productosPorCategoria'));
     }
 }

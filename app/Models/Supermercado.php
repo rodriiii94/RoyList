@@ -7,7 +7,9 @@ use App\Models\ListaCompra;
 
 class Supermercado extends Model
 {
-    protected $fillable = ['nombre'];
+    protected $fillable = [
+        'nombre'
+    ];
 
     public function listasDeCompra()
     {
