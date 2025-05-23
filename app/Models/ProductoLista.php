@@ -13,6 +13,7 @@ class ProductoLista extends Model
         'lista_compra_id',
         'nombre_producto',
         'cantidad',
+        'precio',
         'notas',
         'imagen'
     ];
@@ -57,18 +58,39 @@ class ProductoLista extends Model
         return self::destroy($productoId);
     }
 
-    /**
-     * Obtiene y agrupa productos por categoría desde una API externa.
-     *
-     * Este método realiza una petición HTTP para obtener una lista global de productos,
-     * luego para cada producto obtiene su detalle y lo agrupa según la primera categoría disponible.
-     * Si no se encuentra una categoría, se agrupa bajo 'Sin categoría'.
-     *
-     * @return array Un array asociativo donde las claves son los nombres de las categorías y los valores son arrays de productos.
-     */
+    public static function obtenerTodosProductos()
+    {
+        $agrupados = self::obtenerProductosAgrupadosPorCategoria();
+
+        return collect($agrupados)->flatMap(function ($productos) {
+            return $productos;
+        })->values()->all();
+    }
+
+    public static function obtenerProductosPorCategoria($categoria)
+    {
+        $todos = self::obtenerTodosProductos();
+
+        return collect($todos)
+            ->filter(fn($p) => $p['categoria'] === $categoria)
+            ->values()
+            ->all();
+    }
+
+    public static function obtenerCategoriasDisponibles()
+    {
+        $todos = self::obtenerTodosProductos();
+
+        return collect($todos)
+            ->pluck('categoria')
+            ->unique()
+            ->sort()
+            ->values()
+            ->all();
+    }
+
     public static function obtenerProductosAgrupadosPorCategoria()
     {
-        // Cachea durante 1 hora (3600 segundos) con una clave única
         return Cache::remember('productos_api_agrupados', 3600, function () {
             $apiBase = config('api.url');
             $response = Http::get("{$apiBase}/data");
@@ -98,6 +120,7 @@ class ProductoLista extends Model
                     'imagen'  => $detalle['product']['thumbnail']['value'] ?? null,
                     'precio'  => $detalle['product']['price_instructions']['unit_price']['value'] ?? null,
                     'url'     => $detalle['product']['share_url']['value'] ?? null,
+                    'categoria' => $categoria,
                 ];
             }
 

@@ -77,69 +77,21 @@
 
             <!-- Contenido: Explorar productos -->
             <div id="tab-content-api" class="space-y-8">
-                <!-- Filtro por categoría -->
-                <div class="mb-6">
-                    <label for="filtroCategoria" class="block text-sm font-medium text-gray-700 mb-1">Filtrar por
-                        categoría:</label>
-                    <select id="filtroCategoria" onchange="filtrarCategoria()"
-                        class="w-full sm:w-64 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200">
-                        <option value="todas">Todas</option>
-                        @foreach ($productosPorCategoria as $categoria => $productos)
-                            <option value="{{ Str::slug($categoria) }}">{{ $categoria }}</option>
-                        @endforeach
+                <!-- Buscador y selección de categoría -->
+                <div class="mb-4">
+                    <label for="categoriaSelect" class="block font-bold text-lg mb-2">Selecciona una categoría:</label>
+                    <select id="categoriaSelect" class="w-full border rounded px-4 py-2">
+                        <option disabled selected>Cargando categorías...</option>
                     </select>
                 </div>
-                @foreach ($productosPorCategoria as $categoria => $productos)
-                    <div class="categoria-section" data-categoria="{{ Str::slug($categoria) }}">
-                        <div class="bg-white p-6 rounded-xl shadow-sm">
-                            <h2 class="text-xl font-bold text-gray-800 mb-4 border-b pb-2">{{ $categoria }}</h2>
 
-                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-6">
-                                @foreach ($productos as $producto)
-                                    <div
-                                        class="bg-gray-50 hover:bg-white p-4 rounded-xl shadow transition duration-200 flex flex-col items-center text-center">
-                                        @if (!empty($producto['imagen']))
-                                            <img src="{{ $producto['imagen'] }}" alt="{{ $producto['nombre'] }}"
-                                                class="w-24 h-24 object-cover rounded mb-3 shadow-sm border border-gray-100">
-                                        @else
-                                            <div
-                                                class="w-24 h-24 bg-gray-200 rounded mb-3 flex items-center justify-center text-gray-400">
-                                                <span class="text-xs">Sin imagen</span>
-                                            </div>
-                                        @endif
+                <!-- Contenedor de productos -->
+                <div id="productosContainer" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
 
-                                        <h3 class="text-sm font-semibold text-gray-700">{{ $producto['nombre'] }}</h3>
-
-                                        @if (!empty($producto['precio']))
-                                            <p class="text-green-600 font-bold text-sm mt-1">{{ $producto['precio'] }} €
-                                            </p>
-                                        @endif
-
-                                        <div class="flex flex-col gap-1 mt-2">
-                                            @if (!empty($producto['url']))
-                                                <a href="{{ $producto['url'] }}" target="_blank"
-                                                    class="text-blue-500 text-xs underline hover:text-blue-700">
-                                                    Ver más
-                                                </a>
-                                            @endif
-
-                                            <form action="{{-- {{ route('lista.agregar') }} --}}" method="POST">
-                                                @csrf
-                                                <input type="hidden" name="nombre" value="{{ $producto['nombre'] }}">
-                                                <input type="hidden" name="precio" value="{{ $producto['precio'] }}">
-                                                <input type="hidden" name="url" value="{{ $producto['url'] }}">
-                                                <button type="submit"
-                                                    class="mt-1 text-white bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded text-xs shadow">
-                                                    Añadir a la lista
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
+                <!-- Loader -->
+                <div id="loader" class="text-center hidden">
+                    <p class="text-gray-500">Cargando productos...</p>
+                </div>
             </div>
 
 
@@ -184,18 +136,76 @@
             }
         }
 
-        function filtrarCategoria() {
-            const seleccionada = document.getElementById('filtroCategoria').value;
-            const secciones = document.querySelectorAll('.categoria-section');
+        document.addEventListener('DOMContentLoaded', () => {
+            const categoriaSelect = document.getElementById('categoriaSelect');
+            const productosContainer = document.getElementById('productosContainer');
+            const loader = document.getElementById('loader');
 
-            secciones.forEach(section => {
-                if (seleccionada === 'todas' || section.dataset.categoria === seleccionada) {
-                    section.classList.remove('hidden');
-                } else {
-                    section.classList.add('hidden');
-                }
+            // Cargar categorías
+            fetch('/productos/categorias')
+                .then(res => res.json())
+                .then(categorias => {
+                    categoriaSelect.innerHTML = '<option disabled selected>Selecciona una categoría</option>';
+                    categorias.forEach(cat => {
+                        const opt = document.createElement('option');
+                        opt.value = cat;
+                        opt.textContent = cat;
+                        categoriaSelect.appendChild(opt);
+                    });
+                });
+
+            // Cargar productos cuando se selecciona una categoría
+            categoriaSelect.addEventListener('change', () => {
+                const categoria = categoriaSelect.value;
+                productosContainer.innerHTML = '';
+                loader.classList.remove('hidden');
+
+                fetch(`/productos/por-categoria?categoria=${encodeURIComponent(categoria)}`)
+                    .then(res => {
+                        // console.log('Respuesta:' res);
+                        return res.json()
+                    })
+                    .then(productos => {
+                        console.log('Productos recibidos:', productos);
+                        loader.classList.add('hidden');
+                        productosContainer.innerHTML = productos.map(prod => `
+                    <div class="bg-white p-4 rounded shadow flex flex-col items-center">
+                        ${prod.imagen ? `<img src="${prod.imagen}" alt="${prod.nombre}" class="w-24 h-24 object-cover rounded mb-2">` : ''}
+                        <h3 class="text-sm font-semibold text-center">${prod.nombre}</h3>
+                        ${prod.precio ? `<p class="text-green-600 font-bold mt-1">${prod.precio} €</p>` : ''}
+                        ${prod.url ? `<a href="${prod.url}" target="_blank" class="text-blue-500 text-sm mt-2 underline">Ver más</a>` : ''}
+                    </div>
+                `).join('');
+                    })
+                    .catch(error => {
+                        console.error('Error al cargar productos:', error);
+                        loader.classList.add('hidden');
+                    });
             });
-        }
+        });
+
+        document.getElementById('categoriaSelect').addEventListener('change', function() {
+            const categoria = this.value;
+
+            fetch(`/productos/por-categoria?categoria=${encodeURIComponent(categoria)}`)
+                .then(response => response.json())
+                .then(data => {
+                    const contenedor = document.getElementById('contenedorProductos');
+                    contenedor.innerHTML = '';
+
+                    data.forEach(producto => {
+                        const div = document.createElement('div');
+                        div.innerHTML = `
+                    <div class="bg-white p-4 rounded shadow text-center">
+                        ${producto.imagen ? `<img src="${producto.imagen}" class="w-24 h-24 mx-auto mb-2" />` : ''}
+                        <h3 class="text-sm font-semibold">${producto.nombre}</h3>
+                        ${producto.precio ? `<p class="text-green-600 font-bold mt-1">${producto.precio} €</p>` : ''}
+                        ${producto.url ? `<a href="${producto.url}" target="_blank" class="text-blue-500 text-sm mt-2 underline">Ver más</a>` : ''}
+                    </div>`;
+                        contenedor.appendChild(div);
+                    });
+                });
+        });
     </script>
 
 @endsection

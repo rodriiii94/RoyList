@@ -59,4 +59,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/lista/{id}', [ListaCompra_Controller::class, 'mostrarLista'])->name('lista_compra');
     Route::delete('/lista/{id}/producto/{productoId}', [ProductoLista_Controller::class, 'eliminarProducto'])->name('productos.destroy');
     Route::get('/api/productos-sugeridos/{lista}', [ProductoLista_Controller::class, 'mostrarProductos'])->name('productos.api');
+    Route::get('/productos/por-categoria', [ProductoLista_Controller::class, 'obtenerPorCategoria']);
+    Route::get('/productos/categorias', [ProductoLista_Controller::class, 'obtenerCategorias']);
 });

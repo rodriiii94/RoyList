@@ -82,26 +82,25 @@ class ListaCompra_Controller extends Controller
         return redirect()->route('listas')->with('success', 'Lista de compra eliminada con éxito.');
     }
 
-    // Mostrar pagina de una sola lista de compra
     /**
-     * Muestra la lista de compra correspondiente al ID proporcionado.
+     * Muestra la lista de compra por su ID.
      *
-     * Este método instancia un nuevo objeto de ListaCompra, obtiene la lista de compra
-     * asociada al identificador dado y retorna la vista 'productos' con la lista obtenida.
+     * Este método crea una nueva instancia de ListaCompra y llama al método mostrarLista
+     * pasando el ID proporcionado para obtener la lista correspondiente. Luego, carga las
+     * categorías disponibles desde el modelo ProductoLista y devuelve la vista 'productos'
+     * con los datos de la lista y las categorías.
      *
-     * @param int $id El identificador de la lista de compra a mostrar.
-     * @return \Illuminate\View\View La vista 'productos' con la lista de compra.
+     * @param int $id Identificador de la lista de compra a mostrar.
+     * @return \Illuminate\View\View Vista 'productos' con los datos de la lista y categorías.
      */
     public function mostrarLista($id)
     {
         $listaCompra = new ListaCompra();
         $lista = $listaCompra->mostrarLista($id);
-        $productoListaController = new ProductoLista_Controller();
-        $productosPorCategoria = $productoListaController->mostrarProductos();
 
-        // Agrupar por categoría (puedes hacer esto dentro del bloque también si prefieres)
-        // $productosPorCategoria = collect($productosApi)->groupBy('categoria');
+        // Cargar las categorías disponibles desde el modelo
+        $categorias = ProductoLista::obtenerCategoriasDisponibles();
 
-        return view('productos', compact('lista', 'productosPorCategoria'));
+        return view('productos', compact('lista', 'categorias'));
     }
 }

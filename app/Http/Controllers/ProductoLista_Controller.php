@@ -36,4 +36,41 @@ class ProductoLista_Controller extends Controller
         $productosPorCategoria = ProductoLista::obtenerProductosAgrupadosPorCategoria();
         return $productosPorCategoria;
     }
+
+    /**
+     * Obtiene las categorías disponibles para los productos.
+     *
+     * Este método utiliza el modelo ProductoLista para obtener las categorías
+     * disponibles y devuelve una respuesta JSON con la lista de categorías.
+     *
+     * @return \Illuminate\Http\JsonResponse Respuesta JSON con las categorías disponibles.
+     */
+    public function obtenerCategorias()
+    {
+        $productosAgrupados = ProductoLista::obtenerProductosAgrupadosPorCategoria();
+        $categorias = array_keys($productosAgrupados);
+        return response()->json($categorias);
+    }
+
+    /**
+     * Obtiene los productos de la lista de compra filtrados por una categoría específica.
+     *
+     * Este método recibe una solicitud HTTP con el parámetro 'categoria' y retorna
+     * un listado de productos que pertenecen a dicha categoría. Si no se especifica
+     * la categoría, retorna un error 400.
+     *
+     * @param  \Illuminate\Http\Request  $request  La solicitud HTTP entrante que contiene el parámetro 'categoria'.
+     * @return \Illuminate\Http\JsonResponse      Respuesta JSON con los productos filtrados o un mensaje de error.
+     */
+    public function obtenerPorCategoria(Request $request)
+    {
+        $categoria = $request->query('categoria');
+
+        if (!$categoria) {
+            return response()->json(['error' => 'Categoría no especificada'], 400);
+        }
+
+        $productos = ProductoLista::obtenerProductosPorCategoria($categoria);
+        return response()->json($productos);
+    }
 }
