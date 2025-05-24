@@ -10,6 +10,4 @@ Schema::create('lista_compra', function (Blueprint $table) {
     $table->foreignId('supermercado_id')->constrained('supermercados')->onDelete('cascade'); // Relacion con la tabla de supermercados
     $table->string('nombre'); // Columna nombre
     $table->timestamps(); // Columnas created_at y updated_at
-
-    $table->unique(['user_id', 'supermercado_id']); // 1 lista por supermercado por usuario
 });
