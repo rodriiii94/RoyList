@@ -53,7 +53,7 @@ class ProductoLista extends Model
      * @param  int  $productoId  El identificador único del producto a eliminar.
      * @return int  El número de registros eliminados (0 o 1).
      */
-    public function eliminarProducto($productoId)
+    public static function eliminarProducto($productoId)
     {
         return self::destroy($productoId);
     }

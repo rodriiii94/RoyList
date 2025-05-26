@@ -1,34 +1,53 @@
-export default function showTabs() {
-    function showTab(tab) {
-        const tabs = ["productos", "api"];
+export default function showTab(tab) {
+    const productosTab = document.getElementById("tab-content-productos");
+    const sugeridosTab = document.getElementById("tab-content-api");
+    const btnProductos = document.getElementById("tab-productos");
+    const btnSugeridos = document.getElementById("tab-api");
 
-        tabs.forEach((t) => {
-            document.getElementById(`tab-content-${t}`).classList.add("hidden");
-            const tabBtn = document.getElementById(`tab-${t}`);
-            tabBtn.classList.remove(
-                "bg-green-100",
-                "text-green-700",
-                "shadow-inner"
-            );
-            tabBtn.classList.add("text-gray-600", "hover:bg-green-50");
-        });
+    if (tab === "productos") {
+        productosTab.classList.remove("hidden");
+        sugeridosTab.classList.add("hidden");
 
-        document
-            .getElementById(`tab-content-${tab}`)
-            .classList.remove("hidden");
-        const activeBtn = document.getElementById(`tab-${tab}`);
-        activeBtn.classList.remove("text-gray-600", "hover:bg-green-50");
-        activeBtn.classList.add(
-            "bg-green-100",
+        btnProductos.classList.add(
             "text-green-700",
+            "bg-green-100",
             "shadow-inner"
         );
-    }
+        btnSugeridos.classList.remove(
+            "text-green-700",
+            "bg-green-100",
+            "shadow-inner"
+        );
+    } else {
+        productosTab.classList.add("hidden");
+        sugeridosTab.classList.remove("hidden");
 
-    document.addEventListener("DOMContentLoaded", () => {
-        showTab("productos");
-        document.getElementById("tab-productos").onclick = () =>
-            showTab("productos");
-        document.getElementById("tab-api").onclick = () => showTab("api");
-    });
+        btnSugeridos.classList.add(
+            "text-green-700",
+            "bg-green-100",
+            "shadow-inner"
+        );
+        btnProductos.classList.remove(
+            "text-green-700",
+            "bg-green-100",
+            "shadow-inner"
+        );
+
+        // Cargar productos sugeridos solo una vez
+        if (!window.productosSugeridosCargados) {
+            const listaId = window.LISTA_ID;
+            fetch(`/api/productos-sugeridos/${listaId}`)
+                .then((response) => response.text())
+                .then((html) => {
+                    document.getElementById("contenido-sugeridos").innerHTML =
+                        html;
+                    window.productosSugeridosCargados = true;
+                })
+                .catch((error) => {
+                    document.getElementById("contenido-sugeridos").innerHTML =
+                        "<p>Error al cargar productos sugeridos.</p>";
+                    console.error(error);
+                });
+        }
+    }
 }

@@ -5,22 +5,43 @@
 @section('content')
     <section class="bg-gray-50 min-h-screen py-12">
         <div class="max-w-6xl mx-auto px-6 mt-16">
-            <!-- Encabezado -->
-            <div class="bg-white p-6 rounded-xl shadow-md mb-6">
-                <h2 class="text-2xl font-bold text-gray-800">Lista: {{ $lista->nombre }} </h2>
-                <p class="text-base text-gray-500">{{ $lista->supermercado->nombre }}</p>
+            <!-- Encabezado mejorado -->
+            <div class="bg-white p-6 rounded-xl shadow-md mb-6 relative">
+                <div class="flex items-start gap-4">
+                    <!-- Botón de volver atrás -->
+                    <a href="{{ route('listas') }}"
+                        class="flex items-center justify-center p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200 text-gray-600 hover:text-gray-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                    </a>
+
+                    <!-- Contenido del encabezado -->
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">{{ $lista->nombre }}</h2>
+                        <div class="flex items-center mt-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 mr-1" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                            </svg>
+                            <p class="text-base text-gray-500">{{ $lista->supermercado->nombre }}</p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Tabs estilo profesional -->
             <div class="bg-white rounded-xl shadow-sm p-2 mb-6 flex justify-center space-x-4">
                 <button id="tab-productos" onclick="showTab('productos')"
                     class="w-1/2 py-3 text-base font-semibold rounded-lg transition duration-200 ease-in-out
-                       text-green-700 bg-green-100 shadow-inner focus:outline-none">
+                text-green-700 bg-green-100 shadow-inner focus:outline-none">
                     Mis productos
                 </button>
                 <button id="tab-api" onclick="showTab('api')"
                     class="w-1/2 py-3 text-base font-semibold rounded-lg transition duration-200 ease-in-out
-                       text-gray-600 hover:text-green-700 hover:bg-green-50 focus:outline-none">
+                text-gray-600 hover:text-green-700 hover:bg-green-50 focus:outline-none">
                     Añadir productos
                 </button>
             </div>
@@ -35,7 +56,6 @@
                     @foreach ($lista->productos as $producto)
                         <div class="flex items-center justify-between bg-white p-5 rounded-xl shadow-sm">
                             <div class="flex items-start gap-4">
-                                <input type="checkbox" class="mt-1 accent-green-600 w-5 h-5" />
                                 @if ($producto->imagen)
                                     <img src="{{ $producto->imagen }}" alt="{{ $producto->nombre_producto }}"
                                         class="w-16 h-16 object-cover rounded">
@@ -52,11 +72,15 @@
                                         <p class="text-sm text-gray-400 italic"><b class="text-gray-500">Notas:</b>
                                             {{ $producto->notas }}</p>
                                     @endif
+
+                                    @if ($producto->precio)
+                                        <p class="text-sm text-emerald-600 font-bold mt-1">{{ $producto->precio }} €</p>
+                                    @endif
                                 </div>
                             </div>
 
                             <form
-                                action="{{ route('productos.destroy', ['id' => $producto->id, 'productoId' => $producto->id]) }}"
+                                action="{{ route('productos.destroy', ['id' => $lista->id, 'productoId' => $producto->id]) }}"
                                 method="POST">
                                 @csrf
                                 @method('DELETE')
@@ -79,10 +103,24 @@
             <div id="tab-content-api" class="space-y-8">
                 <!-- Buscador y selección de categoría -->
                 <div class="mb-4">
-                    <label for="categoriaSelect" class="block font-bold text-lg mb-2">Selecciona una categoría:</label>
-                    <select id="categoriaSelect" class="w-full border rounded px-4 py-2">
-                        <option disabled selected>Cargando categorías...</option>
-                    </select>
+                    <div class="flex flex-col md:flex-row md:items-end md:gap-4">
+                        <!-- Select de categoría -->
+                        <div class="w-full md:w-1/2">
+                            <label for="categoriaSelect" class="block font-bold text-lg mb-2">Selecciona una
+                                categoría:</label>
+                            <select id="categoriaSelect"
+                                class="w-full border rounded px-4 py-2 focus:outline-none focus:ring focus:border-emerald-500">
+                                <option disabled selected>Cargando categorías...</option>
+                            </select>
+                        </div>
+
+                        <!-- Input de búsqueda -->
+                        <div class="w-full md:w-1/2 mt-4 md:mt-0">
+                            <label for="buscadorInput" class="block font-bold text-lg mb-2">Buscar productos:</label>
+                            <input type="text" id="buscadorInput" placeholder="Escribe el nombre de un producto..."
+                                class="w-full border rounded px-4 py-2 focus:outline-none focus:ring focus:border-emerald-500" />
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Contenedor de productos -->
@@ -94,118 +132,56 @@
                 </div>
             </div>
 
-
         </div>
+
+        <!-- Modal para añadir producto: cantidad y notas -->
+        <div id="modalNota"
+            class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden backdrop-blur-sm px-4 py-6">
+            <div
+                class="bg-white rounded-2xl shadow-xl w-full max-w-md mx-auto border border-gray-100 overflow-hidden transform transition-all">
+                <!-- Header -->
+                <div class="border-b border-gray-100 px-6 py-4">
+                    <h2 class="text-xl font-semibold text-gray-800">Añadir producto</h2>
+                </div>
+
+                <!-- Contenido -->
+                <div class="p-6 space-y-5">
+                    <!-- Campo Cantidad -->
+                    <div class="space-y-2">
+                        <label for="cantidadInput" class="block text-sm font-medium text-gray-700">Cantidad</label>
+                        <input type="number" id="cantidadInput" min="1" value="1"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all">
+                    </div>
+
+                    <!-- Campo Notas -->
+                    <div class="space-y-2">
+                        <label for="notaInput" class="block text-sm font-medium text-gray-700">Notas</label>
+                        <textarea id="notaInput" rows="3"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all resize-none"
+                            placeholder="Ej: Solo si está en oferta..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="bg-gray-50 px-6 py-4 border-t border-gray-100">
+                    <div class="flex justify-end gap-3">
+                        <button id="cancelarNota"
+                            class="px-5 py-2.5 text-gray-600 hover:text-gray-800 font-medium transition-colors">
+                            Cancelar
+                        </button>
+                        <button id="guardarNota"
+                            class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg transition-colors">
+                            Guardar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </section>
 
+    {{-- Obtener el id de la lista para poder usarlo en js/buscadorProd.js --}}
     <script>
-        function showTab(tab) {
-            const productosTab = document.getElementById('tab-content-productos');
-            const sugeridosTab = document.getElementById('tab-content-api');
-            const btnProductos = document.getElementById('tab-productos');
-            const btnSugeridos = document.getElementById('tab-api');
-
-            if (tab === 'productos') {
-                productosTab.classList.remove('hidden');
-                sugeridosTab.classList.add('hidden');
-
-                btnProductos.classList.add('text-green-700', 'bg-green-100', 'shadow-inner');
-                btnSugeridos.classList.remove('text-green-700', 'bg-green-100', 'shadow-inner');
-            } else {
-                productosTab.classList.add('hidden');
-                sugeridosTab.classList.remove('hidden');
-
-                btnSugeridos.classList.add('text-green-700', 'bg-green-100', 'shadow-inner');
-                btnProductos.classList.remove('text-green-700', 'bg-green-100', 'shadow-inner');
-
-                // Cargar productos sugeridos solo una vez
-                if (!window.productosSugeridosCargados) {
-                    const listaId = {{ $lista->id }};
-                    fetch(`/api/productos-sugeridos/${listaId}`)
-                        .then(response => response.text())
-                        .then(html => {
-                            document.getElementById('contenido-sugeridos').innerHTML = html;
-                            window.productosSugeridosCargados = true;
-                        })
-                        .catch(error => {
-                            document.getElementById('contenido-sugeridos').innerHTML =
-                                '<p>Error al cargar productos sugeridos.</p>';
-                            console.error(error);
-                        });
-                }
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const categoriaSelect = document.getElementById('categoriaSelect');
-            const productosContainer = document.getElementById('productosContainer');
-            const loader = document.getElementById('loader');
-
-            // Cargar categorías
-            fetch('/productos/categorias')
-                .then(res => res.json())
-                .then(categorias => {
-                    categoriaSelect.innerHTML = '<option disabled selected>Selecciona una categoría</option>';
-                    categorias.forEach(cat => {
-                        const opt = document.createElement('option');
-                        opt.value = cat;
-                        opt.textContent = cat;
-                        categoriaSelect.appendChild(opt);
-                    });
-                });
-
-            // Cargar productos cuando se selecciona una categoría
-            categoriaSelect.addEventListener('change', () => {
-                const categoria = categoriaSelect.value;
-                productosContainer.innerHTML = '';
-                loader.classList.remove('hidden');
-
-                fetch(`/productos/por-categoria?categoria=${encodeURIComponent(categoria)}`)
-                    .then(res => {
-                        // console.log('Respuesta:' res);
-                        return res.json()
-                    })
-                    .then(productos => {
-                        console.log('Productos recibidos:', productos);
-                        loader.classList.add('hidden');
-                        productosContainer.innerHTML = productos.map(prod => `
-                    <div class="bg-white p-4 rounded shadow flex flex-col items-center">
-                        ${prod.imagen ? `<img src="${prod.imagen}" alt="${prod.nombre}" class="w-24 h-24 object-cover rounded mb-2">` : ''}
-                        <h3 class="text-sm font-semibold text-center">${prod.nombre}</h3>
-                        ${prod.precio ? `<p class="text-green-600 font-bold mt-1">${prod.precio} €</p>` : ''}
-                        ${prod.url ? `<a href="${prod.url}" target="_blank" class="text-blue-500 text-sm mt-2 underline">Ver más</a>` : ''}
-                    </div>
-                `).join('');
-                    })
-                    .catch(error => {
-                        console.error('Error al cargar productos:', error);
-                        loader.classList.add('hidden');
-                    });
-            });
-        });
-
-        document.getElementById('categoriaSelect').addEventListener('change', function() {
-            const categoria = this.value;
-
-            fetch(`/productos/por-categoria?categoria=${encodeURIComponent(categoria)}`)
-                .then(response => response.json())
-                .then(data => {
-                    const contenedor = document.getElementById('contenedorProductos');
-                    contenedor.innerHTML = '';
-
-                    data.forEach(producto => {
-                        const div = document.createElement('div');
-                        div.innerHTML = `
-                    <div class="bg-white p-4 rounded shadow text-center">
-                        ${producto.imagen ? `<img src="${producto.imagen}" class="w-24 h-24 mx-auto mb-2" />` : ''}
-                        <h3 class="text-sm font-semibold">${producto.nombre}</h3>
-                        ${producto.precio ? `<p class="text-green-600 font-bold mt-1">${producto.precio} €</p>` : ''}
-                        ${producto.url ? `<a href="${producto.url}" target="_blank" class="text-blue-500 text-sm mt-2 underline">Ver más</a>` : ''}
-                    </div>`;
-                        contenedor.appendChild(div);
-                    });
-                });
-        });
+        window.LISTA_ID = {{ $lista->id }};
     </script>
-
 @endsection

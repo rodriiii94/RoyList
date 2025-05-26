@@ -11,13 +11,12 @@ class ProductoLista_Controller extends Controller
     public function eliminarProducto(Request $request, $id, $productoId)
     {
         // Validar el ID del producto
-        $request->validate([
-            'productoId' => 'required|exists:producto_lista,id',
-        ]);
+        if (!ProductoLista::find($productoId)) {
+            return redirect()->back()->withErrors('Producto no encontrado.');
+        }
 
         // Eliminar el producto de la lista
-        $productoLista = new ProductoLista();
-        $productoLista->eliminarProducto($productoId);
+        ProductoLista::eliminarProducto($productoId);
 
         // Redirigir a la vista de la lista de compra
         return redirect()->route('lista_compra', ['id' => $id])->with('success', 'Producto eliminado de la lista.');
@@ -72,5 +71,37 @@ class ProductoLista_Controller extends Controller
 
         $productos = ProductoLista::obtenerProductosPorCategoria($categoria);
         return response()->json($productos);
+    }
+
+    /**
+     * Guarda un nuevo producto en la lista de compras.
+     *
+     * Este método recibe una solicitud HTTP con los datos del producto,
+     * crea una nueva instancia de ProductoLista, asigna los valores recibidos
+     * y guarda el producto en la base de datos.
+     *
+     * @param  \Illuminate\Http\Request  $request  Solicitud HTTP con los datos del producto:
+     *                                            - lista_compra_id: int, ID de la lista de compra
+     *                                            - nombre_producto: string, nombre del producto
+     *                                            - cantidad: int, cantidad del producto
+     *                                            - precio: float, precio del producto
+     *                                            - notas: string|null, notas adicionales (opcional)
+     *                                            - imagen: string|null, ruta o nombre de la imagen (opcional)
+     * @return \Illuminate\Http\JsonResponse  Respuesta JSON indicando si la operación fue exitosa.
+     */
+    public function guardarProducto(Request $request)
+    {
+        $producto = new ProductoLista();
+
+        $producto->lista_compra_id = $request->lista_compra_id;
+        $producto->nombre_producto = $request->nombre_producto;
+        $producto->cantidad = $request->cantidad;
+        $producto->precio = $request->precio;
+        $producto->notas = $request->notas;
+        $producto->imagen = $request->imagen;
+
+        $producto->save();
+
+        return response()->json(['success' => true]);
     }
 }

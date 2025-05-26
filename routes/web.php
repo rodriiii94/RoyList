@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 // ! Rutas de la API
 Route::get('/pruebaApi', function () {
-    $response = Http::get('http://localhost:3000/api/data');
+    $response = Http::get(config('api.url') . '/data');
     $data = $response->json();
     foreach ($data as $i => $product) {
         echo ($i + 1) . " - " . $product['name'] . " - " . $product['id'] . '<br>';
@@ -61,4 +61,5 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/api/productos-sugeridos/{lista}', [ProductoLista_Controller::class, 'mostrarProductos'])->name('productos.api');
     Route::get('/productos/por-categoria', [ProductoLista_Controller::class, 'obtenerPorCategoria']);
     Route::get('/productos/categorias', [ProductoLista_Controller::class, 'obtenerCategorias']);
+    Route::post('/producto/guardar', [ProductoLista_Controller::class, 'guardarProducto']);
 });

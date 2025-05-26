@@ -1,5 +1,12 @@
 import "./bootstrap";
-import './menu.js';
-import showTabs from './tabs.js';
+import showTab from './tabs.js';
+import agregarProd from "./agregarProd.js";
+import "./buscadorProd.js";
 
-showTabs();
+window.showTab = showTab;
+agregarProd();
+// buscarProducto();
+
+document.addEventListener('DOMContentLoaded', () => {
+    showTab('productos');
+});
