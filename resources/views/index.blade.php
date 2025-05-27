@@ -78,62 +78,62 @@
 {{-- BENEFICIOS DESTACADOS --}}
 <section class="py-20 bg-gray-50">
     <div class="container mx-auto px-6">
-        <div class="flex flex-col lg:flex-row items-center gap-12 ml-40">
+        <div class="flex flex-col lg:flex-row items-center gap-12 lg:ml-40">
             {{-- Imagen --}}
             <div class="flex-1 max-w-lg">
-                <div class="relative rounded-xl overflow-hidden">
-                    <img src="{{ asset('images/RoyListLogoTrans.png') }}" alt="Beneficios de RoyList" class="w-full h-auto object-cover">
-                </div>
+            <div class="relative rounded-xl overflow-hidden">
+                <img src="{{ asset('images/RoyListLogoTrans.png') }}" alt="Beneficios de RoyList" class="w-full h-auto object-cover">
+            </div>
             </div>
             
             {{-- Contenido --}}
             <div class="flex-1">
-                <span class="inline-block bg-emerald-100 text-emerald-800 px-4 py-2 rounded-full text-sm font-semibold mb-4">Beneficios</span>
-                <h2 class="text-3xl font-bold text-gray-800 mb-6">Por qué elegir RoyList</h2>
-                
-                <div class="space-y-6">
-                    <div class="flex items-start gap-4">
-                        <div class="flex-shrink-0 mt-1">
-                            <div class="w-10 h-10 bg-emerald-50 rounded-lg flex items-center justify-center">
-                                <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                            </div>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-gray-800">Ahorro de tiempo</h3>
-                            <p class="text-gray-600">Organiza tus compras por pasillos y supermercados para optimizar tu tiempo.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-start gap-4">
-                        <div class="flex-shrink-0 mt-1">
-                            <div class="w-10 h-10 bg-emerald-50 rounded-lg flex items-center justify-center">
-                                <svg class="w-6 h-6 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-gray-800">Reducción de desperdicio</h3>
-                            <p class="text-gray-600">Sugerencias inteligentes basadas en tus hábitos de consumo.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-start gap-4">
-                        <div class="flex-shrink-0 mt-1">
-                            <div class="w-10 h-10 bg-emerald-50 rounded-lg flex items-center justify-center">
-                                <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path>
-                                </svg>
-                            </div>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-gray-800">Control de gastos</h3>
-                            <p class="text-gray-600">Seguimiento de presupuesto y alertas para compras conscientes.</p>
-                        </div>
+            <span class="inline-block bg-emerald-100 text-emerald-800 px-4 py-2 rounded-full text-sm font-semibold mb-4">Beneficios</span>
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">Por qué elegir RoyList</h2>
+            
+            <div class="space-y-6">
+                <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 mt-1">
+                    <div class="w-10 h-10 bg-emerald-50 rounded-lg flex items-center justify-center">
+                    <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
                     </div>
                 </div>
+                <div>
+                    <h3 class="font-semibold text-gray-800">Ahorro de tiempo</h3>
+                    <p class="text-gray-600">Organiza tus compras por pasillos y supermercados para optimizar tu tiempo.</p>
+                </div>
+                </div>
+                
+                <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 mt-1">
+                    <div class="w-10 h-10 bg-emerald-50 rounded-lg flex items-center justify-center">
+                    <svg class="w-6 h-6 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
+                    </svg>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-gray-800">Reducción de desperdicio</h3>
+                    <p class="text-gray-600">Sugerencias inteligentes basadas en tus hábitos de consumo.</p>
+                </div>
+                </div>
+                
+                <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 mt-1">
+                    <div class="w-10 h-10 bg-emerald-50 rounded-lg flex items-center justify-center">
+                    <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path>
+                    </svg>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-gray-800">Control de gastos</h3>
+                    <p class="text-gray-600">Seguimiento de presupuesto y alertas para compras conscientes.</p>
+                </div>
+                </div>
+            </div>
             </div>
         </div>
     </div>
