@@ -1,4 +1,5 @@
 # Aplicación de Lista de la Compra en Laravel
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/rodriiii94/RoyList)
 
 <p align="center">
     <a href="https://laravel.com" target="_blank">
