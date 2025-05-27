@@ -40,7 +40,7 @@ Sigue estos pasos para configurar el proyecto localmente:
 1. Clona el repositorio:
      ```bash
      git clone https://github.com/your-username/tfg-listacompra.git
-     cd tfg-listacompra
+     cd RoyList
      ```
 
 2. Instala las dependencias:
