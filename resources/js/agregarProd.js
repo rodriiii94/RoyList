@@ -46,7 +46,6 @@ export default function agregarProd() {
                 document
                 .getElementById("modalNota")
                 .classList.add("hidden");
-                alert("Producto añadido a tu lista ✅");
             })
             .catch((err) => {
                 console.log("Este es el producto:", productoSeleccionado);
