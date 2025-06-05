@@ -1,0 +1,30 @@
+@startuml Usuario
+|Usuario|
+start
+:Abre página de registro;
+:Completa formulario (nombre, email, contraseña);
+:Hace clic en "Registrarse";
+|Aplicación|
+:Recibe datos en RegisterController;
+partition "AuthServices" {
+    :Valida campos y crea usuario (estado: no verificado);
+    :Genera token de verificación único;
+}
+:Guarda usuario en base de datos (email_verified_at = null);
+|Aplicación|
+:Invoca EmailVerificacionCustom para notificar al usuario;
+|Servicio de Correo|
+:Envía correo a usuario con enlace de verificación;
+|Usuario|
+:Recibe correo y hace clic en enlace de verificación;
+|Aplicación|
+:Petición llega y se ejecuta metodo fulfill();
+:Verifica token contra base de datos;
+if (Token válido?) then (sí)
+    :Actualiza campo email_verified_at del usuario;
+    :Redirige a página de inicio;
+else (no)
+    :Muestra pantalla de "Token inválido o expirado";
+endif
+stop
+@enduml

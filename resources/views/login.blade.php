@@ -38,8 +38,15 @@
                             </label>
                             <div class="relative">
                                 <input id="email" name="email" type="email" autocomplete="email" required
-                                    class="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200 outline-none">
+                                    class="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200 outline-none"
+                                    value="{{ old('email') }}">
+                                    
                             </div>
+                            @if ($errors->has('email'))
+                                <p class="text-red-600 text-sm mt-2">
+                                    {{ $errors->first('email') }}
+                                </p>
+                            @endif
                         </div>
 
                         <!-- Contraseña -->

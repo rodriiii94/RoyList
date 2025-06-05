@@ -12,7 +12,7 @@
                     <h1 class="text-3xl font-bold text-gray-800 mb-2">Mis Listas de Compra</h1>
                     <p class="text-gray-600">Administra tus listas de compra en diferentes supermercados</p>
                 </div>
-                <a href="{{ route('crear_lista') }}"
+                <a href="{{ route('showCrearLista') }}"
                     class="mt-4 md:mt-0 bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-lg font-semibold shadow-sm transition duration-300 flex items-center">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -52,8 +52,7 @@
                                             </svg>
                                         </button>
                                     </a>
-                                    <form action="{{ route('borrar_lista', $lista->id) }}" method="POST"
-                                        onsubmit="return confirm('¿Estás seguro de que quieres borrar esta lista?');">
+                                    <form action="{{ route('borrarLista', $lista->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="text-gray-400 hover:text-red-600 transition">
@@ -83,7 +82,7 @@
                 {{-- Nueva Lista --}}
                 <div
                     class="border-2 border-dashed border-gray-300 rounded-xl hover:border-emerald-400 transition duration-300">
-                    <a href="{{ route('crear_lista') }}"
+                    <a href="{{ route('showCrearLista') }}"
                         class="h-full flex flex-col items-center justify-center p-8 text-center">
                         <svg class="w-10 h-10 text-gray-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

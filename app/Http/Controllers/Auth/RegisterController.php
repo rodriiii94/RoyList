@@ -12,17 +12,11 @@ use Illuminate\Validation\Rules;
 
 class RegisterController extends Controller
 {
-    public function create()
-    {
-        return view('login');
-    }
-
-    public function store(Request $request)
+    public function register(Request $request)
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            // 'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'password' => ['required', 'string', 'confirmed', Rules\Password::min(size: 8)->letters()->numbers()->symbols()],
             'terms' => ['accepted'],
         ]);

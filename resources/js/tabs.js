@@ -32,22 +32,5 @@ export default function showTab(tab) {
             "bg-green-100",
             "shadow-inner"
         );
-
-        // Cargar productos sugeridos solo una vez
-        if (!window.productosSugeridosCargados) {
-            const listaId = window.LISTA_ID;
-            fetch(`/api/productos-sugeridos/${listaId}`)
-                .then((response) => response.text())
-                .then((html) => {
-                    document.getElementById("contenido-sugeridos").innerHTML =
-                        html;
-                    window.productosSugeridosCargados = true;
-                })
-                .catch((error) => {
-                    document.getElementById("contenido-sugeridos").innerHTML =
-                        "<p>Error al cargar productos sugeridos.</p>";
-                    console.error(error);
-                });
-        }
     }
 }

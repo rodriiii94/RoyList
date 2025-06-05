@@ -21,25 +21,6 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    public function store(Request $request)
-    {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-            'remember' => ['nullable', 'boolean'],
-        ]);
-
-        if (Auth::attempt($credentials, $request->remember)) {
-            $request->session()->regenerate();
-
-            return redirect()->intended('index');
-        }
-
-        return back()->withErrors([
-            'email' => 'Las credenciales proporcionadas no coinciden con nuestros registros.',
-        ])->onlyInput('email');
-    }
-
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -51,7 +32,7 @@ class LoginController extends Controller
             return redirect()->route('index');
         } else {
             return back()->withErrors([
-                'email' => 'Las credenciales proporcionadas no coinciden con nuestros registros.',
+                'email' => 'Las credenciales proporcionadas no coinciden.',
             ])->onlyInput('email');
         }
     }

@@ -17,11 +17,12 @@ export default function agregarProd() {
             }
         });
         
-        document
-        .getElementById("cancelarNota")
-        .addEventListener("click", () => {
-            document.getElementById("modalNota").classList.add("hidden");
-        });
+        const cancelarNotaBtn = document.getElementById("cancelarNota");
+        if (cancelarNotaBtn) {
+            cancelarNotaBtn.addEventListener("click", () => {
+                document.getElementById("modalNota").classList.add("hidden");
+            });
+        }
         
         document.getElementById("guardarNota").addEventListener("click", () => {
             const nota = document.getElementById("notaInput").value;

@@ -53,6 +53,16 @@
                         <p class="text-gray-500">No hay productos en esta lista.</p>
                     </div>
                 @else
+                    <div class="mt-6">
+                        <p class="text-sm text-gray-500">Total:
+                            <span class="font-bold text-3xl text-emerald-600">
+                                {{ $lista->productos->sum(function ($producto) {
+                                    return $producto->precio ? $producto->precio * ($producto->cantidad ?? 1) : 0;
+                                }) }}
+                                €
+                            </span>
+                        </p>
+                    </div>
                     @foreach ($lista->productos as $producto)
                         <div class="flex items-center justify-between bg-white p-5 rounded-xl shadow-sm">
                             <div class="flex items-start gap-4">

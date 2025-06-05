@@ -1,0 +1,27 @@
+@startuml AñadirProducto
+|Usuario|
+start
+:Accede a la vista de la lista de la compra;
+:Hace clic en "Añadir producto";
+|Aplicación|
+:Solicita selección de categoría al usuario;
+|Usuario|
+:Selecciona categoría y confirma búsqueda;
+|Aplicación|
+:Hace petición a la API de productos con la categoría;
+|API|
+:Devuelve lista de productos (nombre, precio, imagen) a la aplicación;
+|Aplicación|
+:Muestra lista de productos disponibles al usuario;
+|Usuario|
+:Selecciona producto y cantidad;
+:Hace clic en "Guardar producto";
+|Aplicación|
+:Guarda producto en tabla producto_lista;
+:Actualiza vista de la lista de la compra;
+|Usuario|
+:Visualiza producto agregado;
+stop
+@enduml
+
+

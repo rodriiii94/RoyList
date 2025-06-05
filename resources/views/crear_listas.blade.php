@@ -18,7 +18,7 @@
             {{-- Tarjeta del formulario --}}
             <div class="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
                 <div class="p-6">
-                    <form class="space-y-5" action="{{ route('listas_create') }}" method="POST">
+                    <form class="space-y-5" action="{{ route('crearLista') }}" method="POST">
                         @csrf
 
                         {{-- Campo Nombre --}}

@@ -107,34 +107,38 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Evento al seleccionar categoría
-    categoriaSelect.addEventListener("change", () => {
-        const categoria = categoriaSelect.value;
-        productosContainer.innerHTML = "";
-        loader.classList.remove("hidden");
+    if (categoriaSelect) {
+        categoriaSelect.addEventListener("change", () => {
+            const categoria = categoriaSelect.value;
+            productosContainer.innerHTML = "";
+            loader.classList.remove("hidden");
 
-        fetch(
-            `/productos/por-categoria?categoria=${encodeURIComponent(
-                categoria
-            )}`
-        )
-            .then((res) => res.json())
-            .then((productos) => {
-                loader.classList.add("hidden");
-                productosFiltrados = productos; // guardamos todos
-                renderizarProductos(productos);
-            })
-            .catch((error) => {
-                console.error("Error al cargar productos:", error);
-                loader.classList.add("hidden");
-            });
-    });
+            fetch(
+                `/productos/por-categoria?categoria=${encodeURIComponent(
+                    categoria
+                )}`
+            )
+                .then((res) => res.json())
+                .then((productos) => {
+                    loader.classList.add("hidden");
+                    productosFiltrados = productos; // guardamos todos
+                    renderizarProductos(productos);
+                })
+                .catch((error) => {
+                    console.error("Error al cargar productos:", error);
+                    loader.classList.add("hidden");
+                });
+        });
+    }
 
     // Evento al buscar en el input
-    buscadorInput.addEventListener("input", () => {
-        const texto = buscadorInput.value.toLowerCase();
-        const productosFiltradosPorBusqueda = productosFiltrados.filter(
-            (prod) => prod.nombre.toLowerCase().includes(texto)
-        );
-        renderizarProductos(productosFiltradosPorBusqueda);
-    });
+    if (buscadorInput) {
+        buscadorInput.addEventListener("input", () => {
+            const texto = buscadorInput.value.toLowerCase();
+            const productosFiltradosPorBusqueda = productosFiltrados.filter(
+                (prod) => prod.nombre.toLowerCase().includes(texto)
+            );
+            renderizarProductos(productosFiltradosPorBusqueda);
+        });
+    }
 });

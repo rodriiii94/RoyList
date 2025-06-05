@@ -22,12 +22,38 @@
                                         d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                 </svg>
                             </div>
-
-                            <div>
-                                <a href=" {{ route('logout') }} "><x-heroicon-m-arrow-left-start-on-rectangle
-                                        class="w-6 h-6 text-gray-600" /></a>
-                            </div>
                         </button>
+                    </div>
+
+                    {{-- Menú móvil --}}
+                    <div class="relative">
+                        <!-- Botón hamburguesa -->
+                        <button id="menuToggle"
+                            class="text-gray-700 hover:text-gray-900 focus:outline-none p-2 rounded-md hover:bg-gray-100 transition">
+                            {{-- <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg> --}}
+                            <x-heroicon-m-ellipsis-vertical class="w-6 h-6" />
+                        </button>
+
+                        <!-- Menú desplegable -->
+                        <div id="dropdownMenu"
+                            class="absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded-xl shadow-xl hidden z-50">
+                            <a href="{{ route('listas') }}"
+                                class="flex items-center gap-2 px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition rounded-t-xl">
+                                <x-heroicon-m-list-bullet class="w-6 h-6 text-gray-600" />
+                                Mis Listas
+                            </a>
+                            <a href="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit"
+                                    class="w-full flex items-center gap-2 px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition rounded-b-xl text-left">
+                                    <x-heroicon-m-arrow-left-start-on-rectangle class="w-6 h-6 text-gray-600" />
+                                    Cerrar sesión
+                                </button>
+                            </a>
+                        </div>
                     </div>
                 @else
                     {{-- Menú para invitados --}}
@@ -56,18 +82,12 @@
                             class="absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded-xl shadow-xl hidden z-50">
                             <a href="{{ route('login') }}"
                                 class="flex items-center gap-2 px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition rounded-t-xl">
-                                <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M5 12h14M12 5l7 7-7 7" />
-                                </svg>
+                                <x-heroicon-m-arrow-right-end-on-rectangle class="w-6 h-6 text-gray-600" />
                                 Iniciar sesión
                             </a>
                             <a href="{{ route('register') }}"
                                 class="flex items-center gap-2 px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition rounded-b-xl">
-                                <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 4v16m8-8H4" />
-                                </svg>
+                                <x-heroicon-m-pencil-square class="w-6 h-6 text-gray-600" />
                                 Registrarse
                             </a>
                         </div>

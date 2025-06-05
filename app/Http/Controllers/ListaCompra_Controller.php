@@ -6,8 +6,6 @@ use App\Models\ListaCompra;
 use App\Models\ProductoLista;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Http;
 
 class ListaCompra_Controller extends Controller
 {
@@ -57,10 +55,10 @@ class ListaCompra_Controller extends Controller
         return view('listas', compact('listas', 'productos'));
     }
 
-    public function contarProductos($listaId)
+    public function contarProductos($id)
     {
         $productoLista = new ProductoLista();
-        $productos = $productoLista->contarProductos($listaId);
+        $productos = $productoLista->contarProductos($id);
         return $productos;
     }
 
