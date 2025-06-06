@@ -51,7 +51,6 @@ export default function agregarProd() {
             .catch((err) => {
                 console.log("Este es el producto:", productoSeleccionado);
                 console.error("Error al guardar:", err);
-                alert("He llehado a agregarProd.js");
             });
         });
     });
