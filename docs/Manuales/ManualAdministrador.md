@@ -1,147 +1,173 @@
-## Manual de Administrador
+# Manual de Administrador – RoyList
 
-Este manual explica cómo poner en marcha el entorno de desarrollo de RoyList, desplegando tanto el backend en Laravel como el microservicio de API en Node.js, y configurando la base de datos MySQL.
+Este manual explica cómo poner en marcha el entorno de desarrollo y producción de **RoyList**, incluyendo el backend en Laravel, el microservicio Node.js y la base de datos MySQL.
 
-### 1. Requisitos del sistema
+## 1. Requisitos del sistema
 
-* **Git**
-* **PHP 8.2+**
-* **Composer**
-* **Laravel 10+**
-* **Node.js 16+ y npm**
-* **MySQL 8 (o MariaDB compatible)**
-* **Extensiones PHP necesarias:** `pdo_mysql`, `mbstring`, `openssl`, `tokenizer`, `xml`, `ctype`, `json`
+Antes de comenzar, asegúrate de tener instalado lo siguiente:
 
-### 2. Clonar el repositorio
+- Git  
+- PHP 8.2 o superior  
+- Composer  
+- Laravel 10 o superior  
+- Node.js 16+ y npm  
+- MySQL 8 (o MariaDB compatible)  
+
+<div class="page-break"></div>
+
+## 2. Clonar el repositorio
+
+Abre una terminal y ejecuta los siguientes comandos:
 
 ```bash
-git clone https://github.com/tu-usuario/RoyList.git
+git clone https://github.com/rodriiii94/RoyList.git
 cd RoyList
-```
+````
 
-### 3. Configurar Laravel
+## 3. Configurar Laravel
 
-1. **Instalar dependencias PHP**
-
-   ```bash
-   composer install
-   ```
-
-2. **Copiar y editar el archivo de entorno**
-
-   ```bash
-   cp .env.example .env
-   ```
-
-   En `.env` configura los accesos a la base de datos:
-
-   ```java
-   DB_CONNECTION=mysql
-   DB_HOST=127.0.0.1
-   DB_PORT=3306
-   DB_DATABASE=tfg_listacompra
-   DB_USERNAME=tu_usuario
-   DB_PASSWORD=tu_contraseña
-   ```
-
-3. **Generar la clave de la aplicación**
-
-   ```bash
-   php artisan key:generate
-   ```
-
-4. **Ejecutar migraciones y seeders**
-
-   ```bash
-   php artisan migrate --seed
-   ```
-
-   Esto creará las tablas (`users`, `supermercados`, `lista_compra`, `producto_lista`) y rellenará la tabla `supermercados` con las cadenas iniciales (p. ej. Mercadona).
-
-### 4. Compilar assets frontend
-
-1. **Instalar dependencias npm**
-
-   ```bash
-   npm install
-   ```
-
-2. **Iniciar Vite en modo desarrollo**
-
-   ```bash
-   npm run dev
-   ```
-
-   Esto levantará un servidor en `http://localhost:5173` que recargará automáticamente CSS/JS al guardar.
-
-3. **(Opcional) Compilar para producción**
-
-   ```bash
-   npm run build
-   ```
-
-   Los archivos compilados se colocarán en `public/build`.
-
-### 5. Levantar el servidor Laravel
-
-En una terminal:
+### 3.1 Instalar dependencias PHP
 
 ```bash
-php artisan serve --host=localhost --port=8000
+composer install
 ```
 
-La aplicación quedará accesible en:
-
-`http://localhost:8000`
-
-### 6. Configurar y levantar la API de productos
-
-1. **Clonar el repositorio del microservicio Node.js**
-
-En una nueva terminal, clona el repositorio del microservicio que gestiona los productos:
+### 3.2 Copiar y configurar el archivo de entorno
 
 ```bash
-git clone https://github.com/tu-usuario/RoyList-Api.git
+cp .env.example .env
+```
+
+Edita `.env` para configurar la base de datos:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=tfg_listacompra
+DB_USERNAME=tu_usuario
+DB_PASSWORD=tu_contraseña
+```
+
+### 3.3 Generar la clave de aplicación
+
+```bash
+php artisan key:generate
+```
+
+### 3.4 Ejecutar migraciones y seeders
+
+```bash
+php artisan migrate --seed
+```
+
+Esto creará las tablas necesarias (`users`, `supermercados`, `lista_compra`, `producto_lista`) y añadirá datos iniciales a `supermercados` (por ejemplo, Mercadona).
+
+<div class="page-break"></div>
+
+## 4. Compilar los assets del frontend
+
+### 4.1 Instalar dependencias de npm
+
+```bash
+npm install
+```
+
+### 4.2 Iniciar Vite en modo desarrollo
+
+```bash
+npm run dev
+```
+
+Esto iniciará un servidor en `http://localhost:5173` que recargará automáticamente los cambios en JavaScript y CSS.
+
+### 4.3 (Opcional) Compilar para producción
+
+```bash
+npm run build
+```
+
+## 5. Levantar el servidor Laravel
+
+En una nueva terminal:
+
+```bash
+php artisan serve
+```
+
+La aplicación quedará disponible en `http://localhost:8000`.
+
+<div class="page-break"></div>
+
+## 6. Configurar y levantar la API de productos (Node.js)
+
+### 6.1 Clonar el repositorio del microservicio
+
+```bash
+git clone https://github.com/rodriiii94/RoyList-Api.git
 cd RoyList-Api
 ```
 
-2. **Instalar dependencias**
+### 6.2 Instalar dependencias
 
-   ```bash
-   npm install
-   ```
+```bash
+npm install
+```
 
-3. **Iniciar el servidor Node.js**
+### 6.3 Iniciar el servidor
 
-   ```bash
-   node server.js
-   ```
+```bash
+node server.js
+```
 
-   El API quedará accesible en:
+La API estará disponible en `http://localhost:3000`.
 
-   `http://localhost:3000`
+## 7. Verificar funcionamiento de la API
 
-### 7. Verificar la conexión
+Abre en el navegador la siguiente ruta para comprobar la conexión:
 
-* Comprueba que la ruta de Laravel `/pruebaApi` carga correctamente.
+```
+http://localhost:8000/pruebaApi
+```
 
-  `http://localhost:8000/pruebaApi`
+Debería mostrarse una lista con los productos: `{nombre} - {id}`.
 
-  Debe devolver una pagina con todos los productos en formato lista: {nombre} - {id}.
+<div class="page-break"></div>
 
-### 8. Acceso a la base de datos
+## 8. Acceso a la base de datos
 
-* Conéctate a MySQL en `localhost:3306` usando tu cliente preferido (MySQL CLI, MySQL Workbench, phpMyAdmin, etc.).
-* Verifica que existen las tablas migradas y que `supermercados` contiene al menos la entrada inicial.
+Puedes acceder a la base de datos MySQL en `localhost:3306` usando herramientas como:
 
-### 9. Despliegue en producción (resumen)
+* MySQL CLI
+* MySQL Workbench
+* phpMyAdmin
 
-1. Subir código al servidor o en local.
-2. Ajustar `.env` con credenciales y dominios reales.
-3. Ejecutar `composer install`, `npm install`, `npm run build`.
-4. Ejecutar migraciones en la base de datos productiva `php artisan migrate`.
-5. Levantar el servicio Vite en producción `npm run dev`.
-6. Levantar el servidor Laravel `php artisan serve`.
-7. Levantar el microservicio Node.js `node server.js`.
+Verifica que las tablas existen y que la tabla `supermercados` contiene al menos una entrada.
 
-Con estos pasos, RoyList quedará instalado y disponible tanto en entorno de desarrollo como en producción.
+## 9. Despliegue en producción (resumen)
+
+1. Subir el código al servidor.
+2. Configurar `.env` con credenciales reales.
+3. Ejecutar los siguientes comandos:
+
+```bash
+composer install
+npm install
+npm run build
+php artisan migrate
+```
+
+4. (Opcional) Ejecutar los seeders:
+
+```bash
+php artisan db:seed
+```
+
+5. Levantar Laravel (`php artisan serve`, Apache, Nginx, etc.).
+6. Iniciar el microservicio con:
+
+```bash
+node server.js
+```
+
+Con estos pasos, **RoyList** quedará instalado correctamente tanto en entorno de desarrollo como en producción.
