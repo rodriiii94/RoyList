@@ -50,8 +50,8 @@
                 <div class="w-14 h-14 bg-emerald-50 rounded-lg flex items-center justify-center mb-4 mx-auto">
                     <span class="text-emerald-600 font-bold text-xl">1</span>
                 </div>
-                <h3 class="text-xl font-semibold text-gray-800 mb-2 text-center">Configura tus tiendas</h3>
-                <p class="text-gray-600 text-center">Selecciona tus supermercados favoritos para organizar tus compras eficientemente.</p>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2 text-center">Inicia Sesión</h3>
+                <p class="text-gray-600 text-center">Inicia sesión en tu cuenta de RoyList o crea una nueva cuenta para comenzar.</p>
             </div>
 
             {{-- Paso 2 --}}
@@ -60,7 +60,7 @@
                     <span class="text-emerald-600 font-bold text-xl">2</span>
                 </div>
                 <h3 class="text-xl font-semibold text-gray-800 mb-2 text-center">Crea tus listas</h3>
-                <p class="text-gray-600 text-center">Añade productos fácilmente desde catálogos actualizados o crea tus propios items.</p>
+                <p class="text-gray-600 text-center">Crea listas de compras personalizadas para cada ocasión.</p>
             </div>
 
             {{-- Paso 3 --}}
@@ -68,8 +68,8 @@
                 <div class="w-14 h-14 bg-emerald-50 rounded-lg flex items-center justify-center mb-4 mx-auto">
                     <span class="text-emerald-600 font-bold text-xl">3</span>
                 </div>
-                <h3 class="text-xl font-semibold text-gray-800 mb-2 text-center">Compra inteligente</h3>
-                <p class="text-gray-600 text-center">Accede a tus listas organizadas desde cualquier dispositivo cuando vayas a comprar.</p>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2 text-center">Añade productos</h3>
+                <p class="text-gray-600 text-center">Añade productos fácilmente desde catálogos actualizados</p>
             </div>
         </div>
     </div>
