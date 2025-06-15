@@ -1,0 +1,317 @@
+@startuml modelo
+' ===========================
+' Diagrama de Clases - MODELO
+' ===========================
+
+package "Model" {
+
+  class User {
+    -int id
+    -string name
+    -string email
+    -string password
+    --
+    +listasDeCompra() : Collection
+    +sendEmailVerificationNotification() : void
+  }
+
+  class Supermercado {
+    -int id
+    -string nombre
+    --
+    +listasDeCompra() : Collection
+    +getNombre() : string
+  }
+
+  class ListaCompra {
+    -int id
+    -int user_id
+    -int supermercado_id
+    -string nombre
+    --
+    +usuario() : User
+    +supermercado() : Supermercado
+    +productos() : Collection
+    +crearLista(userId, supermercadoId, nombre) : ListaCompra
+    +borrarLista(id) : void
+    +obtenerListas(userId) : Collection
+    +mostrarLista(id) : ListaCompra
+  }
+
+  class ProductoLista {
+    -int id
+    -int lista_compra_id
+    -string nombre_producto
+    -int cantidad
+    -decimal precio
+    -string notas
+    -string imagen
+    --
+    +listaDeCompra() : ListaCompra
+    +obtenerProductos(listaId) : Collection
+    +contarProductos(listaId) : int
+    +eliminarProducto(id) : void
+    +obtenerTodosProductos() : Collection
+    +obtenerProductosPorCategoria(categoria) : Collection
+    +obtenerCategoriasDisponibles() : Collection
+    +obtenerProductosAgrupadosCategoria() : Map
+  }
+
+  ' Relaciones
+  User          "1" -- "0..*" ListaCompra      : tiene
+  Supermercado  "1" -- "0..*" ListaCompra      : categoriza
+  ListaCompra   "1" -- "0..*" ProductoLista    : contiene
+
+}
+@enduml
+
+@startuml controlador
+' ==============================
+' Diagrama de Clases - CONTROLADOR
+' ==============================
+
+package "Controller" {
+
+  abstract class Controller
+
+  package "Auth" {
+    class RegisterController {
+      #authService
+      +register(request : Request) : Response
+    }
+
+    class LoginController {
+      +login(request : Request) : Response
+      +destroy(request : Request) : Response
+    }
+  }
+
+  class Supermercado_Controller {
+    +showSupermercados() : Collection
+  }
+
+  class ListaCompra_Controller {
+    -int user_id
+    --
+    +showListView() : View
+    +create(request : Request) : Response
+    +getListas() : Collection
+    +contarProductos(id : int) : int
+    +borrarLista(id : int) : Response
+    +mostrarLista(id : int) : View
+  }
+
+  class ProductoLista_Controller {
+    +eliminarProducto(id : int) : Response
+    +mostrarProductos() : Collection
+    +obtenerCategorias() : Collection
+    +obtenerPorCategoria(request : Request) : Collection
+    +guardarProducto(request : Request) : Response
+  }
+
+  Controller <|-- RegisterController
+  Controller <|-- LoginController
+  Controller <|-- ListaCompra_Controller
+  Controller <|-- ProductoLista_Controller
+  Controller <|-- Supermercado_Controller
+}
+
+@enduml
+
+@startuml vistas
+' ==============================
+' Diagrama de Paquetes - VISTAS (Vertical)
+' ==============================
+
+top to bottom direction
+
+package "views" {
+  ' Aquí se agrupan todas las plantillas Blade (layouts, listas, productos, auth, etc.)
+  folder "layouts" {
+    [app.blade.php]
+  }
+  folder "components" {
+    [header.blade.php]
+    [footer.blade.php]
+  }
+  [crear_listas.blade.php]
+  [index.blade.php]
+  [listas.blade.php]
+  [productos.blade.php]
+  [register.blade.php]
+  [login.blade.php]
+}
+
+' [crear_listas.blade.php] ..> [app.blade.php] : usa
+' [index.blade.php] ..> [app.blade.php] : usa
+' [listas.blade.php] ..> [app.blade.php] : usa
+' [productos.blade.php] ..> [app.blade.php] : usa
+' [register.blade.php] ..> [app.blade.php] : usa
+' [login.blade.php] ..> [app.blade.php] : usa
+
+[app.blade.php] <.. [crear_listas.blade.php] : usa
+[app.blade.php] <.. [index.blade.php] : usa
+[app.blade.php] <.. [listas.blade.php] : usa
+[app.blade.php] <.. [productos.blade.php] : usa
+[app.blade.php] <.. [register.blade.php] : usa
+[app.blade.php] <.. [login.blade.php] : usa
+
+' [app.blade.php] ..> [header.blade.php] : incluye
+' [app.blade.php] ..> [footer.blade.php] : incluye
+
+[header.blade.php] <.. [app.blade.php] : incluye
+[footer.blade.php] <.. [app.blade.php] : incluye
+
+@enduml
+
+@startuml Completo
+
+' ==========================================
+' Diagrama de Clases Completo con Relaciones Entre Paquetes
+' ==========================================
+
+' ==========================================
+' Paquete: Modelo
+' ==========================================
+
+top to bottom direction
+
+package "Modelo" {
+
+  class User {
+    +int id
+    +string name
+    +string email
+    +string password
+    --
+    +listasDeCompra() : Collection
+    +sendEmailVerificationNotification() : void
+  }
+
+  class Supermercado {
+    +int id
+    +string nombre
+    --
+    +listasDeCompra() : Collection
+    +getNombre() : string
+  }
+
+  class ListaCompra {
+    +int id
+    +int user_id
+    +int supermercado_id
+    +string nombre
+    --
+    +usuario() : User
+    +supermercado() : Supermercado
+    +productos() : Collection
+    +crearLista(userId, supermercadoId, nombre) : ListaCompra
+    +borrarLista(id) : void
+    +obtenerListas(userId) : Collection
+    +mostrarLista(id) : ListaCompra
+  }
+
+  class ProductoLista {
+    +int id
+    +int lista_compra_id
+    +string nombre_producto
+    +int cantidad
+    +decimal precio
+    +string notas
+    +string imagen
+    --
+    +listaDeCompra() : ListaCompra
+    +obtenerProductos(listaId) : Collection
+    +contarProductos(listaId) : int
+    +eliminarProducto(id) : void
+    +obtenerTodosProductos() : Collection
+    +obtenerProductosPorCategoria(categoria) : Collection
+    +obtenerCategoriasDisponibles() : Collection
+    +obtenerProductosAgrupadosCategoria() : Map
+  }
+
+  ' Relaciones entre modelos
+  User          "1" -- "0..*" ListaCompra      : tiene
+  Supermercado  "1" -- "0..*" ListaCompra      : categoriza
+  ListaCompra   "1" -- "0..*" ProductoLista    : contiene
+
+}
+
+' ==========================================
+' Paquete: Controlador
+' ==========================================
+package "Controlador" {
+
+  abstract class Controller
+
+  class Supermercado_Controller {
+    +showSupermercados() : Collection
+  }
+
+  package "Auth" {
+    class RegisterController {
+      +register(request : Request) : Response
+    }
+
+    class LoginController {
+      +login(request : Request) : Response
+      +destroy(request : Request) : Response
+    }
+  }
+
+  class ListaCompra_Controller {
+    -int user_id
+    --
+    +showListView() : View
+    +create(request : Request) : Response
+    +getListas() : Collection
+    +contarProductos(id : int) : int
+    +borrarLista(id : int) : Response
+    +mostrarLista(id : int) : View
+  }
+
+  class ProductoLista_Controller {
+    +eliminarProducto(id : int) : Response
+    +mostrarProductos() : Collection
+    +obtenerCategorias() : Collection
+    +obtenerPorCategoria(request : Request) : Collection
+    +guardarProducto(request : Request) : Response
+  }
+
+  ' Herencia: los controladores extienden de Controller
+  RegisterController    --|> Controller
+  LoginController       --|> Controller
+  ListaCompra_Controller --|> Controller
+  ProductoLista_Controller --|> Controller
+  Supermercado_Controller --|> Controller
+
+}
+
+' Relaciones entre Controladores y Modelos
+RegisterController        ..> User              : utiliza
+LoginController           ..> User              : utiliza
+ListaCompra_Controller     ..> ListaCompra       : utiliza
+ListaCompra_Controller     ..> User              : utiliza
+ListaCompra_Controller     ..> Supermercado      : utiliza
+ListaCompra_Controller     ..> ProductoLista     : utiliza
+ProductoLista_Controller   ..> ProductoLista     : utiliza
+ProductoLista_Controller   ..> ListaCompra       : utiliza
+Supermercado_Controller   ..> Supermercado      : utiliza
+
+' ==========================================
+' Paquete: Vistas
+' ==========================================
+package "Vistas" {
+  component Vistas as vi {
+
+  }
+}
+
+' Relaciones entre Vistas y Controladores
+vi ..> ListaCompra_Controller   : invoca
+vi ..> ListaCompra_Controller   : invoca
+vi ..> LoginController         : invoca
+vi ..> RegisterController      : invoca
+vi ..> ProductoLista_Controller : invoca
+vi ..> Supermercado_Controller : invoca
+@enduml

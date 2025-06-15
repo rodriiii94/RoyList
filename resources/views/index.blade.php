@@ -4,11 +4,11 @@
 
 @section('content')
 
-{{-- HERO REDISEÑADO --}}
-<section class="bg-white pt-32 pb-20"> <!-- Añadido pt-32 para espacio del header -->
+<section class="bg-white pt-32 pb-20">
+    {{-- HERO --}}
     <div class="container mx-auto px-6">
         <div class="flex flex-col lg:flex-row items-center gap-12">
-            {{-- Contenido de texto --}}
+            {{-- Contenido de hero --}}
             <div class="flex-1 text-center lg:text-left">
                 <h1 class="text-4xl sm:text-5xl font-bold text-gray-800 leading-tight mb-6">
                     Organiza tus compras
@@ -18,7 +18,7 @@
                     RoyList simplifica tu experiencia de compra con listas inteligentes que te ayudan a ahorrar tiempo, reducir el desperdicio y mantener el control de tu presupuesto.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                    <a href="{{ route('listas') }}" class="{{-- bg-emerald-600 --}} hover:bg-emerald-700 bg-gradient-to-r from-[#2563EB] to-[#10B981] text-white px-8 py-3 rounded-lg font-semibold shadow-sm transition duration-300">
+                    <a href="{{ route('listas') }}" class="hover:bg-emerald-700 bg-gradient-to-r from-[#2563EB] to-[#10B981] text-white px-8 py-3 rounded-lg font-semibold shadow-sm hover:shadow-md transition duration-300 transform hover:scale-105">
                         Comenzar ahora
                     </a>
                 </div>

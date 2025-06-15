@@ -1,0 +1,20 @@
+@startuml ListasCompra
+|Usuario|
+start
+:Accede a la vista de "Mis listas";
+:Hace clic en "Crear nueva lista";
+|Aplicación|
+:Despliega el formulario de creación;
+:Solicita nombre de lista y supermercado al usuario;
+|Usuario|
+:Introduce nombre de lista;
+:Selecciona supermercado;
+:Hace clic en "Guardar lista";
+|Aplicación|
+:Valida datos recibidos;
+:Guarda nueva lista en tabla lista_compra;
+:Actualiza vista con la nueva lista creada;
+|Usuario|
+:Visualiza la nueva lista en el listado;
+stop
+@enduml

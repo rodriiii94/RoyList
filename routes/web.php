@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ListaCompra_Controller;
 use App\Http\Controllers\ProductoLista_Controller;
 use App\Http\Controllers\Supermercado_Controller;
+use App\Http\Controllers\User_Controller;
 use App\Http\Middleware\PreventBackHistory;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
@@ -56,6 +57,11 @@ Route::middleware(['guest', PreventBackHistory::class])->group(function () {
 Route::middleware(['auth', 'verified', PreventBackHistory::class])->group(function () {
     // Cerrar sesión
     Route::get('logout', [LoginController::class, 'destroy'])->name('logout');
+
+    // Perfil de usuario
+    Route::get('/perfil', [App\Http\Controllers\User_Controller::class, 'show'])->name('perfil');
+    Route::put('/perfil', [App\Http\Controllers\User_Controller::class, 'update'])->name('perfil.update');
+    Route::delete('/perfil', [App\Http\Controllers\User_Controller::class, 'destroy'])->name('perfil.destroy');
 
     // Mostrar todas las listas de la compra de un usuario
     Route::get('/mis-listas', [ListaCompra_Controller::class, 'getListas'])->name('listas');

@@ -61,7 +61,7 @@
                             </div>
                         </div>
 
-                        <!-- Remember me and forgot password -->
+                        <!-- Recuerda y contraseña olvidada -->
                         <div class="flex items-center justify-between">
                             <div class="flex items-center">
                                 <input id="remember_me" name="remember" type="checkbox"
@@ -78,7 +78,7 @@
                             </div>
                         </div>
 
-                        <!-- Login button -->
+                        <!-- Botón de inicio de sesión -->
                         <div>
                             <button type="submit"
                                 class="w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-700 rounded-lg text-white font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500">

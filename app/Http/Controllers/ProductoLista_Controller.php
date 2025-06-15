@@ -8,6 +8,13 @@ use App\Models\ProductoLista;
 class ProductoLista_Controller extends Controller
 {
 
+    /**
+     * Elimina un producto de una lista de compra específica.
+     *
+     * @param int $id ID de la lista de compra.
+     * @param int $productoId ID del producto a eliminar de la lista.
+     * @return \Illuminate\Http\RedirectResponse Redirige de vuelta con un mensaje de éxito o error.
+     */
     public function eliminarProducto($id, $productoId)
     {
         // Validar el ID del producto
@@ -23,6 +30,14 @@ class ProductoLista_Controller extends Controller
     }
 
     // Muestra los productos de la API
+    /**
+     * Obtiene y devuelve los productos agrupados por categoría.
+     *
+     * Utiliza el método estático 'obtenerProductosAgrupadosPorCategoria' del modelo ProductoLista
+     * para recuperar los productos organizados según su categoría correspondiente.
+     *
+     * @return mixed Productos agrupados por categoría.
+     */
     public function mostrarProductos()
     {
         $productosPorCategoria = ProductoLista::obtenerProductosAgrupadosPorCategoria();

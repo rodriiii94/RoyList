@@ -12,6 +12,16 @@ use Illuminate\Validation\Rules;
 
 class RegisterController extends Controller
 {
+    /**
+     * Maneja el registro de un nuevo usuario.
+     *
+     * Valida los datos recibidos del formulario de registro, crea un nuevo usuario,
+     * dispara el evento de registro, inicia sesión automáticamente al usuario y
+     * redirige a la página de verificación de correo electrónico.
+     *
+     * @param  \Illuminate\Http\Request  $request  Solicitud HTTP con los datos de registro.
+     * @return \Illuminate\Http\RedirectResponse   Redirección a la notificación de verificación.
+     */
     public function register(Request $request)
     {
         $request->validate([

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\ListaCompra;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 class ProductoLista extends Model
 {
@@ -91,7 +92,7 @@ class ProductoLista extends Model
 
     public static function obtenerProductosAgrupadosPorCategoria()
     {
-        return Cache::remember('productos_api_agrupados', 3600, function () {
+        return Cache::remember('productos_api_agrupados', 86400, function () {
             $apiBase = config('api.url');
             $response = Http::get("{$apiBase}/data");
 
@@ -102,18 +103,23 @@ class ProductoLista extends Model
             $productosGlobales = $response->json();
             $productosAgrupados = [];
 
+            Log::info('Total productosGlobales: ' . count($productosGlobales));
+
             foreach ($productosGlobales as $producto) {
                 $id = $producto['id'];
+                Log::info("Procesando producto ID: {$id}");
 
                 $detalleResponse = Http::get("{$apiBase}/products/{$id}");
 
                 if (!$detalleResponse->ok()) {
+                    Log::warning("Detalle NO OK para ID {$id}");
                     continue;
                 }
 
                 $detalle = $detalleResponse->json();
 
                 $categoria = $detalle['product']['categories'][0]['name']['value'] ?? 'Sin categoría';
+                Log::info("Producto {$id} categoría: {$categoria}");
 
                 $productosAgrupados[$categoria][] = [
                     'nombre'  => $detalle['product']['display_name']['value'] ?? 'Producto sin nombre',
@@ -123,6 +129,8 @@ class ProductoLista extends Model
                     'categoria' => $categoria,
                 ];
             }
+
+            Log::info('Categorias agrupadas encontradas: ' . implode(', ', array_keys($productosAgrupados)));
 
             return $productosAgrupados;
         });

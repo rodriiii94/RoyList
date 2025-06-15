@@ -6,10 +6,16 @@ use Closure;
 use Illuminate\Http\Request;
 
 class PreventBackHistory {
+    
     /**
-     * Handle an incoming request.
+     * Middleware para prevenir que el navegador almacene en caché las páginas,
+     * evitando así que el usuario pueda navegar hacia atrás después de cerrar sesión u otras acciones sensibles.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * Establece las cabeceras HTTP 'Cache-Control', 'Pragma' y 'Expires' para deshabilitar el almacenamiento en caché.
+     *
+     * @param  \Illuminate\Http\Request  $request  La solicitud HTTP entrante.
+     * @param  \Closure  $next  El siguiente middleware en la cadena.
+     * @return \Symfony\Component\HttpFoundation\Response  La respuesta HTTP con las cabeceras modificadas.
      */
     public function handle(Request $request, Closure $next) {
         $response = $next($request);

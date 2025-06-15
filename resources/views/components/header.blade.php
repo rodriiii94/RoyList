@@ -27,21 +27,22 @@
 
                     {{-- Menú móvil --}}
                     <div class="relative">
-                        <!-- Botón hamburguesa -->
+                        <!-- Botón opciones -->
                         <button id="menuToggle"
                             class="text-gray-700 hover:text-gray-900 focus:outline-none p-2 rounded-md hover:bg-gray-100 transition">
-                            {{-- <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4 6h16M4 12h16M4 18h16"></path>
-                            </svg> --}}
                             <x-heroicon-m-ellipsis-vertical class="w-6 h-6" />
                         </button>
 
                         <!-- Menú desplegable -->
                         <div id="dropdownMenu"
                             class="absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded-xl shadow-xl hidden z-50">
-                            <a href="{{ route('listas') }}"
+                            <a href="{{ route('perfil') }}"
                                 class="flex items-center gap-2 px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition rounded-t-xl">
+                                <x-heroicon-m-user class="w-6 h-6 text-gray-600" />
+                                Mi Perfil
+                            </a>
+                            <a href="{{ route('listas') }}"
+                                class="flex items-center gap-2 px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition ">    
                                 <x-heroicon-m-list-bullet class="w-6 h-6 text-gray-600" />
                                 Mis Listas
                             </a>
@@ -66,9 +67,8 @@
                     </a>
 
                     {{-- Menú móvil --}}
-
                     <div class="relative md:hidden">
-                        <!-- Botón hamburguesa -->
+                        <!-- Botón opciones -->
                         <button id="menuToggle"
                             class="text-gray-700 hover:text-gray-900 focus:outline-none p-2 rounded-md hover:bg-gray-100 transition">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

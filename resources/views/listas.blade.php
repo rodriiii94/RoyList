@@ -30,14 +30,32 @@
                         <div class="p-6">
                             <div class="flex justify-between items-start mb-4">
                                 <h2 class="text-xl font-semibold text-gray-800">{{ $lista->nombre }}</h2>
+
+                                {{-- ! Colores para futuros supermercados --}}
+                                {{-- @php
+                                    $color = [
+                                        'Mercadona' => 'bg-green-100 text-green-800',
+                                        'Ahorra Más' => 'bg-blue-100 text-blue-800',
+                                        'Lidl' => 'bg-yellow-100 text-yellow-800',
+                                        'Aldi' => 'bg-indigo-100 text-indigo-800',
+                                        'Dia' => 'bg-red-100 text-red-800',
+                                        'Carrefour' => 'bg-purple-100 text-purple-800',
+                                    ];
+                                    $supermercadoNombre = $lista->supermercado->nombre ?? 'Desconocido';
+                                    $colorClass = $color[$supermercadoNombre] ?? 'bg-gray-100 text-gray-800';
+                                @endphp --}}
+
+                                {{-- ! Mostrar el nombre del supermercado con colores --}}
+                                {{-- class="inline-block {{ $colorClass }} text-xs font-medium px-2.5 py-0.5 rounded-full">
+                                {{ $supermercadoNombre }} --}}
+
                                 <span
                                     class="bg-emerald-100 text-emerald-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
-                                    {{-- Coger el nombre del supermercado --}}
                                     {{ $lista->supermercado->nombre }}
+
                                 </span>
                             </div>
                             <p class="text-gray-600 mb-4">
-                                {{-- Puedes reemplazar el 0 por $lista->productos_count si haces eager loading --}}
                                 {{ $productos[$lista->id] ?? 0 }} productos en la lista
                             </p>
                             <div class="flex justify-between items-center text-sm text-gray-500">

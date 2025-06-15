@@ -32,7 +32,7 @@
                 </div>
             </div>
 
-            <!-- Tabs estilo profesional -->
+            <!-- Tabs -->
             <div class="bg-white rounded-xl shadow-sm p-2 mb-6 flex justify-center space-x-4">
                 <button id="tab-productos" onclick="showTab('productos')"
                     class="w-1/2 py-3 text-base font-semibold rounded-lg transition duration-200 ease-in-out

@@ -33,7 +33,7 @@
                 <!-- Full Name -->
                 <div>
                     <label for="name" class="block text-sm font-medium text-gray-700 mb-1">
-                        Nombre completo
+                        Nombre
                     </label>
                     <input id="name" name="name" type="text" autocomplete="name" required
                         class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition">
@@ -55,7 +55,7 @@
                     </label>
                     <input id="password" name="password" type="password" autocomplete="new-password" required
                         class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition">
-                    <p class="mt-1 text-xs text-gray-500">Mínimo 8 caracteres: caracter especial, minúscula y mayúscula, y número</p>
+                    <p class="mt-1 text-xs text-gray-500">Mínimo 8 caracteres: carácter especial, minúscula y mayúscula, y número</p>
                 </div>
 
                 <!-- Confirm Password -->
