@@ -11,7 +11,7 @@ return new class extends Migration {
         // Creacion de la tabla producto_lista (productos dentro de una lista de compra)
         Schema::create('producto_lista', function (Blueprint $table) {
             $table->id(); // ID del item
-            $table->foreignId('lista_compra_id')->constrained()->onDelete('cascade');
+            $table->foreignId('lista_compra_id')->constrained('lista_compra')->onDelete('cascade');
             $table->string('nombre_producto'); // Nombre del producto
             $table->integer('cantidad')->default(1); // Cantidad del producto
             $table->text('notas')->nullable(); // Notas sobre el producto

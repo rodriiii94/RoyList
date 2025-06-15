@@ -7,14 +7,14 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::table('lista_compra', function (Blueprint $table) {
-            // Eliminar primero la clave foránea si existe una que use user_id y supermercado_id juntos
-            $table->dropForeign(['user_id']);
-            $table->dropForeign(['supermercado_id']);
+        // Schema::table('lista_compra', function (Blueprint $table) {
+        //     // Eliminar primero la clave foránea si existe una que use user_id y supermercado_id juntos
+        //     $table->dropForeign(['user_id']);
+        //     $table->dropForeign(['supermercado_id']);
 
-            // Ahora se puede eliminar el índice único
-            $table->dropUnique('lista_compra_user_id_supermercado_id_unique');
-        });
+        //     // Ahora se puede eliminar el índice único
+        //     $table->dropUnique('lista_compra_user_id_supermercado_id_unique');
+        // });
     }
 
     public function down(): void
