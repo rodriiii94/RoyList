@@ -146,7 +146,7 @@
 
         <!-- Modal para añadir producto: cantidad y notas -->
         <div id="modalNota"
-            class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden backdrop-blur-sm px-4 py-6">
+            class="fixed inset-0 bg-white/30 flex items-center justify-center z-50 hidden backdrop-blur-sm px-4 py-6">
             <div
                 class="bg-white rounded-2xl shadow-xl w-full max-w-md mx-auto border border-gray-100 overflow-hidden transform transition-all">
                 <!-- Header -->

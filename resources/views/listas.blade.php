@@ -32,10 +32,10 @@
                                 <h2 class="text-xl font-semibold text-gray-800">{{ $lista->nombre }}</h2>
 
                                 {{-- ! Colores para futuros supermercados --}}
-                                {{-- @php
+                                @php
                                     $color = [
                                         'Mercadona' => 'bg-green-100 text-green-800',
-                                        'Ahorra Más' => 'bg-blue-100 text-blue-800',
+                                        'Ahorra Más' => 'bg-orange-100 text-orange-800',
                                         'Lidl' => 'bg-yellow-100 text-yellow-800',
                                         'Aldi' => 'bg-indigo-100 text-indigo-800',
                                         'Dia' => 'bg-red-100 text-red-800',
@@ -43,15 +43,15 @@
                                     ];
                                     $supermercadoNombre = $lista->supermercado->nombre ?? 'Desconocido';
                                     $colorClass = $color[$supermercadoNombre] ?? 'bg-gray-100 text-gray-800';
-                                @endphp --}}
+                                @endphp
 
                                 {{-- ! Mostrar el nombre del supermercado con colores --}}
-                                {{-- class="inline-block {{ $colorClass }} text-xs font-medium px-2.5 py-0.5 rounded-full">
-                                {{ $supermercadoNombre }} --}}
-
+                                
                                 <span
-                                    class="bg-emerald-100 text-emerald-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
-                                    {{ $lista->supermercado->nombre }}
+                                class="inline-block {{ $colorClass }} text-xs font-medium px-2.5 py-0.5 rounded-full">
+                                {{ $supermercadoNombre }}
+                                    {{-- class="bg-emerald-100 text-emerald-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                                    {{ $lista->supermercado->nombre }} --}}
 
                                 </span>
                             </div>
