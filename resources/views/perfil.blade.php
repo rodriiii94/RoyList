@@ -19,7 +19,7 @@
         </div>
 
         <!-- Columna derecha con datos y formulario -->
-        <div class="w-full lg:w-1/2 flex flex-col justify-center py-12 px-6">
+        <div class="w-full lg:w-1/2 flex flex-col justify-center py-12 px-6 mt-14">
             <div class="mx-auto w-full max-w-lg">
                 <!-- Logo responsive arriba en móvil -->
                 <div class="lg:hidden flex justify-center mb-8 mt-14">
