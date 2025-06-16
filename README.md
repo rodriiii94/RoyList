@@ -1,4 +1,5 @@
-# Aplicación de Lista de la Compra en Laravel
+# 🛒 RoyList – Aplicación de Lista de la Compra con Laravel
+
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/rodriiii94/RoyList)
 
 <p align="center">
@@ -9,75 +10,115 @@
 
 <p align="center">
     <a href="https://github.com/laravel/framework/actions">
-        <img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Estado de Construcción">
+        <img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Estado de construcción">
     </a>
     <a href="https://packagist.org/packages/laravel/framework">
-        <img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Descargas Totales">
+        <img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Descargas totales">
     </a>
     <a href="https://packagist.org/packages/laravel/framework">
-        <img src="https://img.shields.io/packagist/v/laravel/framework" alt="Última Versión Estable">
+        <img src="https://img.shields.io/packagist/v/laravel/framework" alt="Última versión estable">
     </a>
     <a href="https://packagist.org/packages/laravel/framework">
         <img src="https://img.shields.io/packagist/l/laravel/framework" alt="Licencia">
     </a>
 </p>
 
-## Sobre el Proyecto
+---
 
-Esta es una aplicación de lista de la compra basada en Laravel, diseñada para ayudar a los usuarios a gestionar sus listas de compras de manera eficiente. La aplicación ofrece una interfaz intuitiva para agregar, editar y organizar artículos, asegurando una experiencia de compra fluida.
+## 📌 Descripción del Proyecto
 
-## Características
+**RoyList** es una aplicación web desarrollada con Laravel 12 que permite a los usuarios gestionar listas de la compra de forma personalizada por supermercado. Integra un catálogo actualizado desde una API externa, permitiendo añadir productos clasificados por categoría con una interfaz sencilla, moderna y responsive.
 
-- Interfaz fácil de usar para gestionar listas de la compra.
-- Agregar, editar y eliminar artículos con facilidad.
-- Categorizar artículos para una mejor organización.
-- Diseño responsivo para uso en móviles y escritorio.
-- Construida con el robusto framework de Laravel para escalabilidad y rendimiento.
+Este proyecto ha sido desarrollado como parte del Trabajo de Fin de Ciclo del ciclo superior de Desarrollo de Aplicaciones Web (DAW).
 
-## Comenzando
+---
 
-Sigue estos pasos para configurar el proyecto localmente:
+## ✨ Características
 
-1. Clona el repositorio:
-     ```bash
-     git clone https://github.com/your-username/tfg-listacompra.git
-     cd RoyList
-     ```
+- Registro de usuarios con verificación de correo electrónico.
+- Gestión de múltiples listas por supermercado.
+- Añadir y eliminar productos desde un catálogo externo actualizado.
+- Visualización de productos agrupados por categoría.
+- Interfaz responsive con Tailwind CSS 4.
+- API propia desarrollada con Node.js y scraping de Mercadona.
+- Almacenamiento en caché para mejorar el rendimiento.
 
-2. Instala las dependencias:
-     ```bash
-     composer install
-     npm install
-     ```
+---
 
-3. Configura el entorno:
-     - Copia `.env.example` a `.env`:
-         ```bash
-         cp .env.example .env
-         ```
-     - Configura tu base de datos y otras variables de entorno en el archivo `.env`.
+## ⚙️ Requisitos
 
-4. Ejecuta las migraciones y llena la base de datos:
-     ```bash
-     php artisan migrate --seed
-     ```
+- PHP 8.2 o superior
+- Composer
+- Node.js 16 o superior
+- MySQL 8 o compatible
+- Extensiones PHP requeridas: `pdo_mysql`, `mbstring`, `openssl`, `tokenizer`, `xml`, `ctype`, `json`
 
-5. Crea una key de aplicación:
-     ```bash
-     php artisan key:generate
-     ```
+---
 
-6. Inicia el servidor de desarrollo:
-     ```bash
-     php artisan serve
-     ```
+## 🧪 Instalación local
 
-7. Accede a la aplicación en `http://localhost:8000`.
+```bash
+# Clonar el repositorio
+git clone https://github.com/tu-usuario/RoyList.git
+cd RoyList
 
-## Contribuir
+# Instalar dependencias
+composer install
+npm install && npm run build
 
-¡Las contribuciones son bienvenidas! Por favor, sigue las [directrices de contribución](https://laravel.com/docs/contributions) para comenzar.
+# Configurar variables de entorno
+cp .env.example .env
+php artisan key:generate
 
-## Licencia
+# Configurar .env con tu base de datos y correo
+php artisan migrate
 
-Este proyecto es software de código abierto licenciado bajo la [licencia MIT](https://opensource.org/licenses/MIT).
+# Iniciar el servidor
+php artisan serve
+```
+
+La aplicación estará disponible en `http://localhost:8000`
+
+---
+
+## 🌐 Estructura del Proyecto
+
+```bash
+├── app/
+├── database/
+├── public/
+├── resources/
+│   └── views/
+├── routes/
+│   └── web.php
+├── .env
+└── vite.config.js
+```
+
+---
+
+## 📡 API de Productos
+
+RoyList se conecta a una API personalizada construida con Node.js y Express, que obtiene los productos mediante scraping del sitio web de Mercadona. Los datos se presentan agrupados por categorías y almacenados en caché para mejorar la eficiencia de carga.
+
+Repositorio de la API: [`RoyList-Api`](https://github.com/rodriiii94/RoyList-Api)
+
+---
+
+## 🤝 Contribuciones
+
+¡Las contribuciones son bienvenidas! Si deseas mejorar este proyecto, por favor abre un issue o un pull request. Sigue las [directrices de Laravel](https://laravel.com/docs/contributions) si quieres mantener buenas prácticas.
+
+---
+
+## 📄 Licencia
+
+Este proyecto está licenciado bajo la [MIT License](LICENSE).
+
+---
+
+## 👨‍💻 Autor
+
+**José Rodrigo Santamaría**
+Desarrollado como parte del TFG del Ciclo Superior de Desarrollo de Aplicaciones Web (DAW).
+Contacto: [rodrisantaga94@gmail.com](mailto:rodrisantaga94@gmail.com)
