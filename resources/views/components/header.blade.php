@@ -13,6 +13,7 @@
                 @auth
                     {{-- Menú de usuario autenticado --}}
                     <div class="relative group">
+                        <a href="{{ route('perfil') }}">
                         <button class="flex items-center space-x-2 focus:outline-none">
                             <span class="hidden md:inline text-emerald-700 font-medium">{{ Auth::user()->name }}</span>
                             <div class="w-8 h-8 rounded-full bg-emerald-200 flex items-center justify-center">
@@ -23,6 +24,7 @@
                                 </svg>
                             </div>
                         </button>
+                        </a>
                     </div>
 
                     {{-- Menú móvil --}}

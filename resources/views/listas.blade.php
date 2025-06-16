@@ -46,13 +46,9 @@
                                 @endphp
 
                                 {{-- ! Mostrar el nombre del supermercado con colores --}}
-                                
                                 <span
-                                class="inline-block {{ $colorClass }} text-xs font-medium px-2.5 py-0.5 rounded-full">
-                                {{ $supermercadoNombre }}
-                                    {{-- class="bg-emerald-100 text-emerald-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
-                                    {{ $lista->supermercado->nombre }} --}}
-
+                                    class="inline-block {{ $colorClass }} text-xs font-medium px-2.5 py-0.5 rounded-full">
+                                    {{ $supermercadoNombre }}
                                 </span>
                             </div>
                             <p class="text-gray-600 mb-4">
