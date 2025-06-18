@@ -5,7 +5,7 @@
 @section('content')
     <section class="bg-gray-50 min-h-screen py-12">
         <div class="max-w-6xl mx-auto px-6 mt-16">
-            <!-- Encabezado mejorado -->
+            <!-- Encabezado -->
             <div class="bg-white p-6 rounded-xl shadow-md mb-6 relative">
                 <div class="flex items-start gap-4">
                     <!-- Botón de volver atrás -->
@@ -32,6 +32,20 @@
                 </div>
             </div>
 
+            @if (strtolower($lista->supermercado->nombre) !== 'mercadona')
+                <div class="mb-6">
+                    <div class="flex items-center bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-xl shadow-sm">
+                        <svg class="w-8 h-8 md:w-6 md:h-6 text-yellow-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 16h-1v-4h-1m1-4h.01M12 20a8 8 0 100-16 8 8 0 000 16z" />
+                        </svg>
+                        <span class="text-yellow-800 text-base">
+                            El catálogo de este supermercado está en proceso. Pronto estarán disponibles los productos. Mientras tanto, puedes añadir productos personalizados.
+                        </span>
+                    </div>
+                </div>
+            @endif
+
             <!-- Tabs -->
             <div class="bg-white rounded-xl shadow-sm p-2 mb-6 flex justify-center space-x-4">
                 <button id="tab-productos" onclick="showTab('productos')"
@@ -53,16 +67,18 @@
                         <p class="text-gray-500">No hay productos en esta lista.</p>
                     </div>
                 @else
-                    <div class="mt-6">
-                        <p class="text-sm text-gray-500">Total:
-                            <span class="font-bold text-3xl text-emerald-600">
-                                {{ $lista->productos->sum(function ($producto) {
-                                    return $producto->precio ? $producto->precio * ($producto->cantidad ?? 1) : 0;
-                                }) }}
-                                €
-                            </span>
-                        </p>
-                    </div>
+                    @if (strtolower($lista->supermercado->nombre) === 'mercadona')
+                        <div class="mt-6">
+                            <p class="text-sm text-gray-500">Total:
+                                <span class="font-bold text-3xl text-emerald-600">
+                                    {{ $lista->productos->sum(function ($producto) {
+                                        return $producto->precio ? $producto->precio * ($producto->cantidad ?? 1) : 0;
+                                    }) }}
+                                    €
+                                </span>
+                            </p>
+                        </div>
+                    @endif
                     @foreach ($lista->productos as $producto)
                         <div class="flex items-center justify-between bg-white p-5 rounded-xl shadow-sm">
                             <div class="flex items-start gap-4">
@@ -107,39 +123,56 @@
                 @endif
             </div>
 
-
-
             <!-- Contenido: Explorar productos -->
             <div id="tab-content-api" class="space-y-8">
                 <!-- Buscador y selección de categoría -->
                 <div class="mb-4">
                     <div class="flex flex-col md:flex-row md:items-end md:gap-4">
-                        <!-- Select de categoría -->
-                        <div class="w-full md:w-1/2">
-                            <label for="categoriaSelect" class="block font-bold text-lg mb-2">Selecciona una
-                                categoría:</label>
-                            <select id="categoriaSelect"
-                                class="w-full border rounded px-4 py-2 focus:outline-none focus:ring focus:border-emerald-500">
-                                <option disabled selected>Cargando categorías...</option>
-                            </select>
-                        </div>
-
-                        <!-- Input de búsqueda -->
-                        <div class="w-full md:w-1/2 mt-4 md:mt-0">
-                            <label for="buscadorInput" class="block font-bold text-lg mb-2">Buscar productos:</label>
-                            <input type="text" id="buscadorInput" placeholder="Escribe el nombre de un producto..."
-                                class="w-full border rounded px-4 py-2 focus:outline-none focus:ring focus:border-emerald-500" />
-                        </div>
+                        <button id="btn-personalizado"
+                            class="px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-emerald-500 to-teal-600 rounded-xl hover:from-emerald-600 hover:to-teal-700 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2 focus:ring-offset-white/90 shadow-md hover:shadow-emerald-200/50 transition-all duration-300 ease-in-out flex items-center gap-2 group">
+                            <svg class="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                            </svg>
+                            <span class="group-hover:translate-x-1 transition-transform duration-200 text-base">Añadir
+                                producto
+                                personalizado</span>
+                        </button>
                     </div>
                 </div>
 
-                <!-- Contenedor de productos -->
-                <div id="productosContainer" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
+                @if (strtolower($lista->supermercado->nombre) === 'mercadona')
+                    <!-- Buscador y selección de categoría -->
+                    <div class="mb-4">
+                        <div class="flex flex-col md:flex-row md:items-end md:gap-4">
+                            <!-- Select de categoría -->
+                            <div class="w-full md:w-1/2">
+                                <label for="categoriaSelect" class="block font-bold text-lg mb-2">Selecciona una
+                                    categoría:</label>
+                                <select id="categoriaSelect"
+                                    class="w-full border rounded px-4 py-2 focus:outline-none focus:ring focus:border-emerald-500">
+                                    <option disabled selected>Cargando categorías...</option>
+                                </select>
+                            </div>
 
-                <!-- Loader -->
-                <div id="loader" class="text-center hidden">
-                    <p class="text-gray-500">Cargando productos...</p>
-                </div>
+                            <!-- Input de búsqueda -->
+                            <div class="w-full md:w-1/2 mt-4 md:mt-0">
+                                <label for="buscadorInput" class="block font-bold text-lg mb-2">Buscar productos:</label>
+                                <input type="text" id="buscadorInput" placeholder="Escribe el nombre de un producto..."
+                                    class="w-full border rounded px-4 py-2 focus:outline-none focus:ring focus:border-emerald-500" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contenedor de productos -->
+                    <div id="productosContainer" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
+
+                    <!-- Loader -->
+                    <div id="loader" class="text-center hidden">
+                        <p class="text-gray-500">Cargando productos...</p>
+                    </div>
+                @endif
             </div>
 
         </div>
@@ -180,6 +213,63 @@
                             Cancelar
                         </button>
                         <button id="guardarNota"
+                            class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg transition-colors">
+                            Guardar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal para producto personalizado -->
+        <div id="modalPersonalizado"
+            class="fixed inset-0 bg-white/30 flex items-center justify-center z-50 hidden backdrop-blur-sm px-4 py-6">
+            <div
+                class="bg-white rounded-2xl shadow-xl w-full max-w-md mx-auto border border-gray-100 overflow-hidden transform transition-all">
+                <div class="border-b border-gray-100 px-6 py-4">
+                    <h2 class="text-xl font-semibold text-gray-800">Añadir producto personalizado</h2>
+                </div>
+
+                <div class="p-6 space-y-5">
+                
+                    {{-- Nombre --}}
+                    <div class="space-y-2">
+                        <label for="nombrePersonalizado" class="block text-sm font-medium text-gray-700">Nombre</label>
+                        <input type="text" id="nombrePersonalizado"
+                        class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all">
+                        <p id="obligatorio" class="text-xs text-red-400 hidden">Obligatorio</p>
+                    </div>
+
+                    {{-- Precio --}}
+                    <div class="space-y-2">
+                        <label for="precioPersonalizado" class="block text-sm font-medium text-gray-700">Precio
+                            (€)</label>
+                        <input type="number" step="0.01" id="precioPersonalizado"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all">
+                    </div>
+
+                    {{-- Cantidad --}}
+                    <div class="space-y-2">
+                        <label for="cantidadPersonalizado"
+                            class="block text-sm font-medium text-gray-700">Cantidad</label>
+                        <input type="number" id="cantidadPersonalizado" min="1" value="1"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all">
+                    </div>
+
+                    {{-- Notas --}}
+                    <div class="space-y-2">
+                        <label for="notaPersonalizado" class="block text-sm font-medium text-gray-700">Notas</label>
+                        <textarea id="notaPersonalizado" rows="3"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all resize-none"></textarea>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-6 py-4 border-t border-gray-100">
+                    <div class="flex justify-end gap-3">
+                        <button id="cancelarPersonalizado"
+                            class="px-5 py-2.5 text-gray-600 hover:text-gray-800 font-medium transition-colors">
+                            Cancelar
+                        </button>
+                        <button id="guardarPersonalizado"
                             class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg transition-colors">
                             Guardar
                         </button>
