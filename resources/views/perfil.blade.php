@@ -31,7 +31,7 @@
                 <div class="bg-white dark:bg-gray-800 px-8 py-10 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700">                    <div class="flex flex-col items-center mb-8">
                         <div
                             class="w-24 h-24 rounded-full bg-emerald-100 flex items-center justify-center mb-4">
-                            <x-heroicon-o-user class="w-14 h-14 text-emerald-600" />
+                            <x-heroicon-o-user class="w-14 h-14 text-emerald-600 dark:text-emerald-400" />
                         </div>
                         <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100">{{ auth()->user()->name }}</h2>
                         <p class="text-sm text-gray-500 dark:text-gray-400">{{ auth()->user()->email }}</p>

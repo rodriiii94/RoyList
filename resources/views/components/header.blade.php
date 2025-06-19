@@ -3,10 +3,10 @@
         <div class="flex items-center justify-between py-4">
             {{-- Logo --}}
             <a href="{{ route('index') }}"
-                class="text-3xl font-bold text-gray-900 dark:text-white flex items-center gap-2 hover:text-emerald-600 transition duration-300">
+                class="text-3xl font-bold text-gray-900 dark:text-white flex items-center gap-2 hover:text-emerald-600 dark:text-emerald-400 transition duration-300">
                 <img src="{{ asset('images/LogoTrans.png') }}" alt="RoyList Logo" class="w-13 h-11 block dark:hidden">
                 <img src="{{ asset('images/SoloLogoBlancoBG.png') }}" alt="RoyList Logo" class="w-13 h-11 hidden dark:block">
-                <span>Roy<span class="text-emerald-600">List</span></span>
+                <span>Roy<span class="text-emerald-600 dark:text-emerald-400">List</span></span>
             </a>
 
             {{-- Acciones --}}
@@ -19,9 +19,9 @@
                     <div class="relative group">
                         <a href="{{ route('perfil') }}">
                         <button class="flex items-center space-x-2 focus:outline-none">
-                            <span class="hidden md:inline text-emerald-600 font-medium">{{ Auth::user()->name }}</span>
+                            <span class="hidden md:inline text-emerald-600 dark:text-emerald-400 font-medium">{{ Auth::user()->name }}</span>
                             <div class="w-8 h-8 rounded-full bg-emerald-200 flex items-center justify-center">
-                                <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor"
+                                <svg class="w-5 h-5 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -87,7 +87,7 @@
                         <div id="dropdownMenu"
                             class="absolute right-0 mt-2 w-44 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-xl hidden z-50">
                             <a href="{{ route('login') }}"
-                                class="flex items-center gap-2 px-4 py-3 text-sm text-gray-700 ark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition rounded-t-xl">
+                                class="flex items-center gap-2 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition rounded-t-xl">
                                 <x-heroicon-m-arrow-right-end-on-rectangle class="w-6 h-6 text-gray-600" />
                                 Iniciar sesión
                             </a>

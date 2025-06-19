@@ -73,10 +73,10 @@
                 <div class="flex items-start">
                     <div class="flex items-center h-5">
                         <input id="terms" name="terms" type="checkbox" required
-                            class="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300 dark:border-gray-700 rounded">
+                            class="h-4 w-4 text-emerald-600 dark:text-emerald-400 focus:ring-emerald-500 border-gray-300 dark:border-gray-700 rounded">
                     </div>
                     <label for="terms" class="ml-2 block text-sm text-gray-700 dark:text-gray-300">
-                        Acepto los <a href="{{ route('terminos') }}" class="font-medium text-emerald-600 hover:text-emerald-500">Términos de servicio</a> y <a href="{{ route('politica') }}" class="font-medium text-emerald-600 hover:text-emerald-500">Política de privacidad</a>
+                        Acepto los <a href="{{ route('terminos') }}" class="font-medium text-emerald-600 dark:text-emerald-400 hover:text-emerald-500">Términos de servicio</a> y <a href="{{ route('politica') }}" class="font-medium text-emerald-600 dark:text-emerald-400 hover:text-emerald-500">Política de privacidad</a>
                     </label>
                 </div>
 
@@ -93,7 +93,7 @@
             <div class="mt-6 text-center">
                 <p class="text-sm text-gray-600 dark:text-gray-300">
                     ¿Ya tienes cuenta? 
-                    <a href="{{ route('login') }}" class="font-medium text-emerald-600 hover:text-emerald-500">
+                    <a href="{{ route('login') }}" class="font-medium text-emerald-600 dark:text-emerald-400 hover:text-emerald-500">
                         Inicia sesión
                     </a>
                 </p>

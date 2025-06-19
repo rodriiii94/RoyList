@@ -58,7 +58,7 @@
                                 <span>Creada: {{ $lista->updated_at->format('d/m/Y') }}</span>
                                 <div class="flex space-x-2">
                                     <a href="{{ route('lista_compra', $lista->id) }}">
-                                        <button class="text-gray-400 hover:text-emerald-600 transition">
+                                        <button class="text-gray-400 hover:text-emerald-600 dark:text-emerald-400 transition">
                                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
@@ -82,7 +82,7 @@
                         </div>
                         <div class="bg-gray-50 dark:bg-gray-700 px-6 py-3 border-t border-gray-100 dark:border-gray-600">
                             <a href="{{ route('lista_compra', $lista->id) }}"
-                                class="text-emerald-500 hover:text-emerald-600 font-medium flex items-center justify-between transition duration-100">
+                                class="text-emerald-500 hover:text-emerald-600 dark:text-emerald-400 font-medium flex items-center justify-between transition duration-100">
                                 Ver lista completa
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">

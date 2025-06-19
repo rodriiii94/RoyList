@@ -12,7 +12,7 @@
             <div class="flex-1 text-center lg:text-left">
                 <h1 class="text-4xl sm:text-5xl font-bold text-gray-800 dark:text-gray-100 leading-tight mb-6">
                     Organiza tus compras
-                    <span class="text-emerald-600">sin complicaciones</span>
+                    <span class="text-emerald-600 dark:text-emerald-400">sin complicaciones</span>
                 </h1>
                 <p class="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-lg mx-auto lg:mx-0">
                     RoyList simplifica tu experiencia de compra con listas inteligentes que te ayudan a ahorrar tiempo, reducir el desperdicio y mantener el control de tu presupuesto.
@@ -48,7 +48,7 @@
             {{-- Paso 1 --}}
             <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-sm hover:shadow-md transition border border-gray-100 dark:border-gray-700">
                 <div class="w-14 h-14 bg-emerald-50 rounded-lg flex items-center justify-center mb-4 mx-auto">
-                    <span class="text-emerald-600 font-bold text-xl">1</span>
+                    <span class="text-emerald-600 dark:text-emerald-400 font-bold text-xl">1</span>
                 </div>
                 <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-2 text-center">Inicia Sesión</h3>
                 <p class="text-gray-600 dark:text-gray-300 text-center">Inicia sesión en tu cuenta de RoyList o crea una nueva cuenta para comenzar.</p>
@@ -57,7 +57,7 @@
             {{-- Paso 2 --}}
             <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-sm hover:shadow-md transition border border-gray-100 dark:border-gray-700">
                 <div class="w-14 h-14 bg-emerald-50 rounded-lg flex items-center justify-center mb-4 mx-auto">
-                    <span class="text-emerald-600 font-bold text-xl">2</span>
+                    <span class="text-emerald-600 dark:text-emerald-400 font-bold text-xl">2</span>
                 </div>
                 <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-2 text-center">Crea tus listas</h3>
                 <p class="text-gray-600 dark:text-gray-300 text-center">Crea listas de compras personalizadas para cada ocasión.</p>
@@ -66,7 +66,7 @@
             {{-- Paso 3 --}}
             <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-sm hover:shadow-md transition border border-gray-100 dark:border-gray-700">
                 <div class="w-14 h-14 bg-emerald-50 rounded-lg flex items-center justify-center mb-4 mx-auto">
-                    <span class="text-emerald-600 font-bold text-xl">3</span>
+                    <span class="text-emerald-600 dark:text-emerald-400 font-bold text-xl">3</span>
                 </div>
                 <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-2 text-center">Añade productos</h3>
                 <p class="text-gray-600 dark:text-gray-300 text-center">Añade productos fácilmente desde catálogos actualizados</p>
@@ -96,7 +96,7 @@
                 <div class="flex items-start gap-4">
                 <div class="flex-shrink-0 mt-1">
                     <div class="w-10 h-10 bg-emerald-50 rounded-lg flex items-center justify-center">
-                    <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-6 h-6 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                     </div>
@@ -110,7 +110,7 @@
                 <div class="flex items-start gap-4">
                 <div class="flex-shrink-0 mt-1">
                     <div class="w-10 h-10 bg-emerald-50 rounded-lg flex items-center justify-center">
-                    <svg class="w-6 h-6 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6">
+                    <svg class="w-6 h-6 text-emerald-600 dark:text-emerald-400" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
                     </svg>
                     </div>
@@ -124,7 +124,7 @@
                 <div class="flex items-start gap-4">
                 <div class="flex-shrink-0 mt-1">
                     <div class="w-10 h-10 bg-emerald-50 rounded-lg flex items-center justify-center">
-                    <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-6 h-6 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path>
                     </svg>
                     </div>

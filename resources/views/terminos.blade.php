@@ -71,7 +71,7 @@
                 <div class="mb-8">
                     <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-4">6. Contacto</h2>
                     <p>
-                        Si tienes alguna duda sobre estos Términos, puedes contactarnos en: <a href="mailto:contacto@roylist.com" class="text-emerald-600 hover:text-emerald-700">contacto@roylist.com</a>
+                        Si tienes alguna duda sobre estos Términos, puedes contactarnos en: <a href="mailto:contacto@roylist.com" class="text-emerald-600 dark:text-emerald-400 hover:text-emerald-700">contacto@roylist.com</a>
                     </p>
                 </div>
             </div>

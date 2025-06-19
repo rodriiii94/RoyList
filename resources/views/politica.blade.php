@@ -90,7 +90,7 @@
                         <li>Retirar tu consentimiento y eliminar tu cuenta en cualquier momento.</li>
                     </ul>
                     <p>
-                        Puedes ejercer estos derechos escribiéndonos a: <a href="mailto:contacto@roylist.com" class="text-emerald-600 hover:text-emerald-700">contacto@roylist.com</a>
+                        Puedes ejercer estos derechos escribiéndonos a: <a href="mailto:contacto@roylist.com" class="text-emerald-600 dark:text-emerald-400 hover:text-emerald-700">contacto@roylist.com</a>
                     </p>
                 </div>
 

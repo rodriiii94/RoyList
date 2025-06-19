@@ -66,14 +66,14 @@
                         <div class="flex items-center justify-between">
                             <div class="flex items-center">
                                 <input id="remember_me" name="remember" type="checkbox"
-                                    class="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300 dark:border-gray-700 rounded">
+                                    class="h-4 w-4 text-emerald-600 dark:text-emerald-400 focus:ring-emerald-500 border-gray-300 dark:border-gray-700 rounded">
                                 <label for="remember_me" class="ml-2 block text-sm text-gray-700 dark:text-gray-300">
                                     Recordar sesión
                                 </label>
                             </div>
 
                             <div class="text-sm">
-                                <a href="#" class="font-medium text-emerald-600 hover:text-emerald-500">
+                                <a href="#" class="font-medium text-emerald-600 dark:text-emerald-400 hover:text-emerald-500">
                                     ¿Olvidaste tu contraseña?
                                 </a>
                             </div>
@@ -90,7 +90,7 @@
 
                     <div class="mt-6 text-center text-sm text-gray-600 dark:text-gray-300">
                         ¿No tienes una cuenta?
-                        <a href="{{ route('register') }}" class="font-medium text-emerald-600 hover:text-emerald-500 ml-1">
+                        <a href="{{ route('register') }}" class="font-medium text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 ml-1">
                             Regístrate aquí
                         </a>
                     </div>
