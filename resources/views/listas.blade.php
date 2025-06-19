@@ -4,13 +4,13 @@
 
 @section('content')
 
-    <section class="bg-white py-8 min-h-screen">
+    <section class="bg-white py-8 min-h-screen dark:bg-gray-900">
         <div class="container mx-auto px-6 mt-14">
             {{-- Encabezado --}}
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
                 <div>
-                    <h1 class="text-3xl font-bold text-gray-800 mb-2">Mis Listas de Compra</h1>
-                    <p class="text-gray-600">Administra tus listas de compra en diferentes supermercados</p>
+                    <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-2">Mis Listas de Compra</h1>
+                    <p class="text-gray-600 dark:text-gray-300">Administra tus listas de compra en diferentes supermercados</p>
                 </div>
                 <a href="{{ route('showCrearLista') }}"
                     class="mt-4 md:mt-0 bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-lg font-semibold shadow-sm transition duration-300 flex items-center">
@@ -26,10 +26,10 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach ($listas as $lista)
                     <div id="{{ $lista->id }}"
-                        class="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition duration-300 overflow-hidden">
+                        class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm hover:shadow-md transition duration-300 overflow-hidden">
                         <div class="p-6">
                             <div class="flex justify-between items-start mb-4">
-                                <h2 class="text-xl font-semibold text-gray-800">{{ $lista->nombre }}</h2>
+                                <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100">{{ $lista->nombre }}</h2>
 
                                 {{-- ! Colores para futuros supermercados --}}
                                 @php
@@ -51,10 +51,10 @@
                                     {{ $supermercadoNombre }}
                                 </span>
                             </div>
-                            <p class="text-gray-600 mb-4">
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">
                                 {{ $productos[$lista->id] ?? 0 }} productos en la lista
                             </p>
-                            <div class="flex justify-between items-center text-sm text-gray-500">
+                            <div class="flex justify-between items-center text-sm text-gray-500 dark:text-gray-400">
                                 <span>Creada: {{ $lista->updated_at->format('d/m/Y') }}</span>
                                 <div class="flex space-x-2">
                                     <a href="{{ route('lista_compra', $lista->id) }}">
@@ -80,9 +80,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="bg-gray-50 px-6 py-3 border-t border-gray-100">
+                        <div class="bg-gray-50 dark:bg-gray-700 px-6 py-3 border-t border-gray-100 dark:border-gray-600">
                             <a href="{{ route('lista_compra', $lista->id) }}"
-                                class="text-emerald-600 hover:text-emerald-700 font-medium flex items-center justify-between">
+                                class="text-emerald-500 hover:text-emerald-600 font-medium flex items-center justify-between transition duration-100">
                                 Ver lista completa
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
@@ -95,15 +95,15 @@
 
                 {{-- Nueva Lista --}}
                 <div
-                    class="border-2 border-dashed border-gray-300 rounded-xl hover:border-emerald-400 transition duration-300">
+                    class="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl hover:border-emerald-400 transition duration-300">
                     <a href="{{ route('showCrearLista') }}"
                         class="h-full flex flex-col items-center justify-center p-8 text-center">
                         <svg class="w-10 h-10 text-gray-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                         </svg>
-                        <h3 class="text-lg font-medium text-gray-700">Crear nueva lista</h3>
-                        <p class="text-sm text-gray-500 mt-1">Comienza desde cero</p>
+                        <h3 class="text-lg font-medium text-gray-700 dark:text-gray-300">Crear nueva lista</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Comienza desde cero</p>
                     </a>
                 </div>
             </div>

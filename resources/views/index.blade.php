@@ -4,17 +4,17 @@
 
 @section('content')
 
-<section class="bg-white pt-32 pb-20">
+<section class="bg-white dark:bg-gray-900 pt-32 pb-20">
     {{-- HERO --}}
     <div class="container mx-auto px-6">
         <div class="flex flex-col lg:flex-row items-center gap-12">
             {{-- Contenido de hero --}}
             <div class="flex-1 text-center lg:text-left">
-                <h1 class="text-4xl sm:text-5xl font-bold text-gray-800 leading-tight mb-6">
+                <h1 class="text-4xl sm:text-5xl font-bold text-gray-800 dark:text-gray-100 leading-tight mb-6">
                     Organiza tus compras
                     <span class="text-emerald-600">sin complicaciones</span>
                 </h1>
-                <p class="text-lg text-gray-600 mb-8 max-w-lg mx-auto lg:mx-0">
+                <p class="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-lg mx-auto lg:mx-0">
                     RoyList simplifica tu experiencia de compra con listas inteligentes que te ayudan a ahorrar tiempo, reducir el desperdicio y mantener el control de tu presupuesto.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -26,9 +26,9 @@
 
             {{-- Imagen --}}
             <div class="flex-1 max-w-2xl">
-                <div class="relative rounded-xl overflow-hidden shadow-lg border border-gray-100">
-                    <img src="{{ asset('images/supermarket.jpg') }}" alt="Lista de compra organizada" class="w-full h-auto object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
+                <div class="relative rounded-xl overflow-hidden">
+                    <img src="{{ asset('images/hero.webp') }}" alt="Lista de compra organizada" class="w-full h-auto object-cover">
+                    {{-- <div class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div> --}}
                 </div>
             </div>
         </div>
@@ -36,61 +36,62 @@
 </section>
 
 {{-- CÓMO FUNCIONA --}}
-<section class="py-20 bg-white">
+<section class="py-20 dark:bg-gray-900 bg-white">
     <div class="container mx-auto px-6">
         <div class="text-center mb-16">
             <span class="inline-block bg-emerald-100 text-emerald-800 px-4 py-2 rounded-full text-sm font-semibold mb-4">Cómo funciona</span>
-            <h2 class="text-3xl font-bold text-gray-800 mb-4">Simplifica tus compras en 3 pasos</h2>
-            <p class="text-gray-600 max-w-2xl mx-auto">Una solución intuitiva para comprar de forma más inteligente y sostenible.</p>
+            <h2 class="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4">Simplifica tus compras en 3 pasos</h2>
+            <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">Una solución intuitiva para comprar de forma más inteligente y sostenible.</p>
         </div>
 
         <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {{-- Paso 1 --}}
-            <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition border border-gray-100">
+            <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-sm hover:shadow-md transition border border-gray-100 dark:border-gray-700">
                 <div class="w-14 h-14 bg-emerald-50 rounded-lg flex items-center justify-center mb-4 mx-auto">
                     <span class="text-emerald-600 font-bold text-xl">1</span>
                 </div>
-                <h3 class="text-xl font-semibold text-gray-800 mb-2 text-center">Inicia Sesión</h3>
-                <p class="text-gray-600 text-center">Inicia sesión en tu cuenta de RoyList o crea una nueva cuenta para comenzar.</p>
+                <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-2 text-center">Inicia Sesión</h3>
+                <p class="text-gray-600 dark:text-gray-300 text-center">Inicia sesión en tu cuenta de RoyList o crea una nueva cuenta para comenzar.</p>
             </div>
 
             {{-- Paso 2 --}}
-            <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition border border-gray-100">
+            <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-sm hover:shadow-md transition border border-gray-100 dark:border-gray-700">
                 <div class="w-14 h-14 bg-emerald-50 rounded-lg flex items-center justify-center mb-4 mx-auto">
                     <span class="text-emerald-600 font-bold text-xl">2</span>
                 </div>
-                <h3 class="text-xl font-semibold text-gray-800 mb-2 text-center">Crea tus listas</h3>
-                <p class="text-gray-600 text-center">Crea listas de compras personalizadas para cada ocasión.</p>
+                <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-2 text-center">Crea tus listas</h3>
+                <p class="text-gray-600 dark:text-gray-300 text-center">Crea listas de compras personalizadas para cada ocasión.</p>
             </div>
 
             {{-- Paso 3 --}}
-            <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition border border-gray-100">
+            <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-sm hover:shadow-md transition border border-gray-100 dark:border-gray-700">
                 <div class="w-14 h-14 bg-emerald-50 rounded-lg flex items-center justify-center mb-4 mx-auto">
                     <span class="text-emerald-600 font-bold text-xl">3</span>
                 </div>
-                <h3 class="text-xl font-semibold text-gray-800 mb-2 text-center">Añade productos</h3>
-                <p class="text-gray-600 text-center">Añade productos fácilmente desde catálogos actualizados</p>
+                <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-2 text-center">Añade productos</h3>
+                <p class="text-gray-600 dark:text-gray-300 text-center">Añade productos fácilmente desde catálogos actualizados</p>
             </div>
         </div>
     </div>
 </section>
 
 {{-- BENEFICIOS DESTACADOS --}}
-<section class="py-20 bg-gray-50">
+<section class="py-20 bg-gray-50 dark:bg-gray-800">
     <div class="container mx-auto px-6">
         <div class="flex flex-col lg:flex-row items-center gap-12 lg:ml-40">
             {{-- Imagen --}}
             <div class="flex-1 max-w-lg">
             <div class="relative rounded-xl overflow-hidden">
-                <img src="{{ asset('images/RoyListLogoTrans.png') }}" alt="Beneficios de RoyList" class="w-full h-auto object-cover">
+                <img src="{{ asset('images/RoyListLogoTrans.png') }}" alt="Beneficios de RoyList" class="w-full h-auto object-cover block dark:hidden">
+                <img src="{{ asset('images/LogoBlancoBG.png') }}" alt="Beneficios de RoyList" class="w-full h-auto object-cover hidden dark:block">
             </div>
             </div>
             
             {{-- Contenido --}}
             <div class="flex-1">
             <span class="inline-block bg-emerald-100 text-emerald-800 px-4 py-2 rounded-full text-sm font-semibold mb-4">Beneficios</span>
-            <h2 class="text-3xl font-bold text-gray-800 mb-6">Por qué elegir RoyList</h2>
-            
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 dark:text-gray-100">Por qué elegir RoyList</h2>
+
             <div class="space-y-6">
                 <div class="flex items-start gap-4">
                 <div class="flex-shrink-0 mt-1">
@@ -101,8 +102,8 @@
                     </div>
                 </div>
                 <div>
-                    <h3 class="font-semibold text-gray-800">Ahorro de tiempo</h3>
-                    <p class="text-gray-600">Organiza tus compras por pasillos y supermercados para optimizar tu tiempo.</p>
+                    <h3 class="font-semibold text-gray-800 dark:text-gray-100">Ahorro de tiempo</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Organiza tus compras por pasillos y supermercados para optimizar tu tiempo.</p>
                 </div>
                 </div>
                 
@@ -115,8 +116,8 @@
                     </div>
                 </div>
                 <div>
-                    <h3 class="font-semibold text-gray-800">Reducción de desperdicio</h3>
-                    <p class="text-gray-600">Sugerencias inteligentes basadas en tus hábitos de consumo.</p>
+                    <h3 class="font-semibold text-gray-800 dark:text-gray-100">Reducción de desperdicio</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Sugerencias inteligentes basadas en tus hábitos de consumo.</p>
                 </div>
                 </div>
                 
@@ -129,8 +130,8 @@
                     </div>
                 </div>
                 <div>
-                    <h3 class="font-semibold text-gray-800">Control de gastos</h3>
-                    <p class="text-gray-600">Seguimiento de presupuesto y alertas para compras conscientes.</p>
+                    <h3 class="font-semibold text-gray-800 dark:text-gray-100">Control de gastos</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Seguimiento de presupuesto y alertas para compras conscientes.</p>
                 </div>
                 </div>
             </div>
